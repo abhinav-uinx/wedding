@@ -346,15 +346,6 @@ html, body {
 
 
 
-/* ─── SWIPE HINT ─── */
-.swipe-hint {
-  position:fixed; bottom:18px; left:50%; transform:translateX(-50%);
-  font-family:'Crimson Text',serif; font-style:italic;
-  font-size:0.78rem; color:rgba(74,46,26,0.55);
-  letter-spacing:0.1em; z-index:100;
-  animation: blink 2.5s ease-in-out infinite;
-  pointer-events:none;
-}
 @keyframes blink {
   0%,100% { opacity:0.4; } 50% { opacity:1; }
 }
@@ -389,25 +380,6 @@ html, body {
   }
 }
 
-/* ─── MUSIC CONTROLLER ─── */
-.audio-control {
-  position: fixed;
-  top: 24px;
-  right: 24px;
-  width: 42px;
-  height: 42px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.65);
-  border: 1px solid rgba(74, 46, 26, 0.22);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  z-index: 150;
-  box-shadow: 0 4px 15px rgba(74, 46, 26, 0.1);
-  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-  color: var(--brown);
-}
 .audio-control:hover {
   transform: scale(1.08);
   background: rgba(255, 255, 255, 0.85);
@@ -590,8 +562,8 @@ html, body {
 
 .splash-btn {
   background: transparent; border: 1.5px solid var(--brown); color: var(--brown);
-  font-family: 'Crimson Text', serif; font-size: 1.3rem;
-  padding: 18px 54px; text-transform: uppercase; letter-spacing: 0.18em;
+  font-family: 'Crimson Text', serif; font-size: 1.05rem;
+  padding: 14px 42px; text-transform: uppercase; letter-spacing: 0.18em;
   cursor: pointer; opacity: 0; transform: translateY(20px);
   animation: splashFadeInUp 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards, vibrateBtn 4s linear infinite;
   animation-delay: 0.3s, 2s; /* start vibrating after 2 seconds */
@@ -679,18 +651,7 @@ html, body {
   </div>
 </div>
 
-<!-- Ambient Music Controller -->
-<div class="audio-control" id="audioControl" title="Play/Pause Music">
-  <div class="waveform">
-    <div class="bar"></div>
-    <div class="bar"></div>
-    <div class="bar"></div>
-    <div class="bar"></div>
-  </div>
-  <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor">
-    <polygon points="5 3 19 12 5 21 5 3"></polygon>
-  </svg>
-</div>
+<!-- Ambient Music Background Audio -->
 <audio id="weddingBgMusic" loop src="https://upload.wikimedia.org/wikipedia/commons/c/cd/Chopin_Nocturne_in_E-flat_major_Op._9_No._2.mp3"></audio>
 
 <!-- Floating Gold Petals -->
@@ -699,7 +660,7 @@ html, body {
 
 
 
-<div class="swipe-hint" id="swipeHint">scroll or drag to navigate ↓</div>
+
 
 <!-- ════════════════════════════════
      PAGE 1 — COVER
@@ -1007,43 +968,6 @@ html, body {
 <script>
 // ─── AMBIENT AUDIO PLAYER CONTROLLER ───
 const music = document.getElementById('weddingBgMusic');
-const audioBtn = document.getElementById('audioControl');
-
-if (audioBtn && music) {
-  audioBtn.addEventListener('click', toggleMusic);
-
-  function toggleMusic() {
-    if (music.paused) {
-      playMusic();
-    } else {
-      pauseMusic();
-    }
-  }
-
-  function playMusic() {
-    music.play().then(() => {
-      audioBtn.classList.add('playing');
-    }).catch(err => {
-      console.log("Autoplay blocked: user must interact first");
-    });
-  }
-
-  function pauseMusic() {
-    music.pause();
-    audioBtn.classList.remove('playing');
-  }
-
-  // Play on first user interaction
-  
-  
-  
-
-  function autoPlayOnInteraction() {
-    if (music.paused) {
-      playMusic();
-    }
-  }
-}
 
 // ─── DRIFTING PETALS GENERATION ───
 const petalsContainer = document.getElementById('petalsContainer');
@@ -1162,18 +1086,6 @@ function updatePageTransforms() {
       if (br) br.style.transform = `translateY(${diff * 35}px)`;
     }
   });
-  
-  // Manage swipe hint visibility
-  const hint = document.getElementById('swipeHint');
-  if (hint) {
-    if (scrollProgress >= pages.length - 1.1) {
-      hint.style.opacity = Math.max(0, 1 - (scrollProgress - (pages.length - 2.1)));
-      if (scrollProgress >= pages.length - 1.0) hint.style.display = 'none';
-    } else {
-      hint.style.display = 'block';
-      hint.style.opacity = '';
-    }
-  }
 }
 
 // Spring loop simulation
@@ -1219,13 +1131,73 @@ function startSpring(target) {
 }
 
 
+
+// ─── FLOWER FIREWORKS EFFECT ───
+const flowerImages = ['cherry_branch.png', 'hibiscus_flower.png', 'wildflower_bunch.png'];
+
+function createFlowerBurst(x, y, count, isMassive) {
+  for (let i = 0; i < count; i++) {
+    const particle = document.createElement('img');
+    particle.src = flowerImages[Math.floor(Math.random() * flowerImages.length)];
+    particle.style.position = 'fixed';
+    particle.style.left = x + 'px';
+    particle.style.top = y + 'px';
+    // Size logic
+    particle.style.width = isMassive ? (40 + Math.random() * 80) + 'px' : (25 + Math.random() * 35) + 'px';
+    particle.style.pointerEvents = 'none';
+    particle.style.zIndex = '9999';
+    particle.style.mixBlendMode = 'multiply';
+    particle.style.opacity = '0.85';
+    
+    document.body.appendChild(particle);
+
+    const angle = Math.random() * Math.PI * 2;
+    const velocity = isMassive ? (200 + Math.random() * 500) : (60 + Math.random() * 120);
+    const tx = Math.cos(angle) * velocity;
+    const ty = Math.sin(angle) * velocity;
+    const rot = (Math.random() - 0.5) * 500; // spin
+
+    const duration = isMassive ? 1800 + Math.random() * 1000 : 900 + Math.random() * 500;
+
+    particle.animate([
+      { transform: `translate(-50%, -50%) scale(0) rotate(0deg)`, opacity: 0.9 },
+      { transform: `translate(calc(-50% + ${tx * 0.7}px), calc(-50% + ${ty * 0.7}px)) scale(1.1) rotate(${rot * 0.6}deg)`, opacity: 0.9, offset: 0.5 },
+      { transform: `translate(calc(-50% + ${tx}px), calc(-50% + ${ty}px)) scale(0.6) rotate(${rot}deg)`, opacity: 0 }
+    ], {
+      duration: duration,
+      easing: 'cubic-bezier(0.25, 1, 0.3, 1)',
+      fill: 'forwards'
+    });
+
+    setTimeout(() => {
+      particle.remove();
+    }, duration);
+  }
+}
+
+const splashScreenElem = document.getElementById('splashScreen');
+if (splashScreenElem) {
+  splashScreenElem.addEventListener('click', (e) => {
+    // Check if click was NOT on the button
+    if (e.target.id !== 'enterBtn') {
+      createFlowerBurst(e.clientX, e.clientY, 7, false);
+    }
+  });
+}
+
 // ─── SPLASH SCREEN LOGIC ───
 const splashScreen = document.getElementById('splashScreen');
 const enterBtn = document.getElementById('enterBtn');
 let invitationOpened = false;
 
 if (enterBtn && splashScreen) {
-  enterBtn.addEventListener('click', () => {
+  enterBtn.addEventListener('click', (e) => {
+    // Massive fireworks explosion
+    const rect = enterBtn.getBoundingClientRect();
+    const bx = rect.left + rect.width / 2;
+    const by = rect.top + rect.height / 2;
+    createFlowerBurst(bx, by, 45, true);
+
     // Shrink and fade button first for haptic feel
     enterBtn.style.transition = 'all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
     enterBtn.style.transform = 'scale(0.5)';
@@ -1238,7 +1210,7 @@ if (enterBtn && splashScreen) {
     
     // Auto-play music if not playing
     if (music && music.paused) {
-      playMusic();
+      music.play().catch(err => console.log("Audio play blocked", err));
     }
   });
 }
