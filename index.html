@@ -106,19 +106,10 @@ html, body {
   mix-blend-mode: multiply;
   opacity: 0.75;
 }
-.corner-tl { top: -8px; left: -8px;
-  width: 190px;
-}
-.corner-tr { top: -8px; right: -8px;
-  width: 175px;
-  transform: rotate(180deg);
-}
-.corner-bl { bottom: -8px; left: -8px;
-  width: 175px;
-}
-.corner-br { bottom: -8px; right: -8px;
-  width: 165px;
-}
+.corner-tl { top: -8px; left: -8px; width: clamp(115px, 35vw, 190px); }
+.corner-tr { top: -8px; right: -8px; width: clamp(105px, 32vw, 175px); transform: rotate(180deg); }
+.corner-bl { bottom: -8px; left: -8px; width: clamp(105px, 32vw, 175px); }
+.corner-br { bottom: -8px; right: -8px; width: clamp(95px, 30vw, 165px); }
 
 /* ─── SIDE VINE BORDERS ─── */
 .vine-left, .vine-right {
@@ -131,11 +122,7 @@ html, body {
 
 
 /* ─── CARD INNER ─── */
-.card-inner {
-  position:relative; z-index:4;
-  padding:50px 72px 60px;
-  text-align:center;
-}
+.card-inner { position:relative; z-index:4; padding:clamp(30px, 8vw, 50px) clamp(24px, 12vw, 72px) clamp(40px, 10vw, 60px); text-align:center; }
 
 /* ─── TYPOGRAPHY ─── */
 .arabic-verse {
@@ -572,9 +559,126 @@ html, body {
   100% { transform: rotate(1.5deg); }
 }
 
+
+/* ─── SPLASH SCREEN ─── */
+.splash-screen {
+  position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
+  background: #c8a86a;
+  z-index: 500;
+  display: flex; justify-content: center; align-items: center;
+  transition: transform 1.6s cubic-bezier(0.68, -0.15, 0.265, 1.35), 
+              opacity 1.4s cubic-bezier(0.8, 0, 0.2, 1),
+              filter 1.2s ease-in;
+  will-change: transform, opacity, filter;
+  transform-origin: center center;
+}
+.splash-screen::before {
+  content: ''; position: absolute; inset: 0;
+  background: url("parchment_bg.png") center center / cover no-repeat;
+  opacity: 0.85; mix-blend-mode: multiply; pointer-events: none;
+}
+.splash-screen.hidden {
+  opacity: 0; 
+  transform: scale(2.5) rotate(3deg); 
+  filter: blur(15px);
+  pointer-events: none;
+}
+.splash-content {
+  position: relative; z-index: 501; text-align: center;
+  display: flex; flex-direction: column; align-items: center;
+}
+
+.splash-btn {
+  background: transparent; border: 1.5px solid var(--brown); color: var(--brown);
+  font-family: 'Crimson Text', serif; font-size: 1.3rem;
+  padding: 18px 54px; text-transform: uppercase; letter-spacing: 0.18em;
+  cursor: pointer; opacity: 0; transform: translateY(20px);
+  animation: splashFadeInUp 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards, vibrateBtn 4s linear infinite;
+  animation-delay: 0.3s, 2s; /* start vibrating after 2 seconds */
+  transition: all 0.4s ease;
+  position: relative; overflow: hidden;
+  border-radius: 4px;
+}
+.splash-btn::after {
+  content:''; position: absolute; top: 0; left: -100%;
+  width: 100%; height: 100%; background: rgba(74,46,26,0.1);
+  transition: left 0.4s ease;
+}
+.splash-btn:hover::after { left: 0; }
+
+@keyframes vibrateBtn {
+  0% { transform: rotate(0deg); }
+  1% { transform: rotate(-2deg); }
+  2% { transform: rotate(2deg); }
+  3% { transform: rotate(-2deg); }
+  4% { transform: rotate(2deg); }
+  5% { transform: rotate(0deg); }
+  
+  8% { transform: rotate(0deg); } 
+  9% { transform: rotate(-2deg); }
+  10% { transform: rotate(2deg); }
+  11% { transform: rotate(-2deg); }
+  12% { transform: rotate(2deg); }
+  13% { transform: rotate(0deg); }
+  
+  16% { transform: rotate(0deg); }
+  17% { transform: rotate(-2deg); }
+  18% { transform: rotate(2deg); }
+  19% { transform: rotate(-2deg); }
+  20% { transform: rotate(2deg); }
+  21% { transform: rotate(0deg); }
+  
+  100% { transform: rotate(0deg); }
+}
+
+@keyframes splashFadeIn { to { opacity: 1; transform: scale(1); } }
+@keyframes splashFadeInUp { to { opacity: 1; transform: translateY(0); } }
+@keyframes kenBurns { 0% { transform: scale(1); } 100% { transform: scale(1.15); } }
+
+/* ─── DROPPING PETALS/LEAVES FROM CORNERS ─── */
+.drop-leaf, .drop-flower {
+  position: absolute; opacity: 0; z-index: 1;
+}
+.drop-leaf {
+  width: 12px; height: 20px;
+  background: linear-gradient(135deg, rgba(85, 107, 47, 0.7), rgba(46, 60, 20, 0.7));
+  border-radius: 0 100% 0 100%;
+}
+.drop-flower {
+  width: 15px; height: 15px;
+  background: linear-gradient(135deg, rgba(220, 120, 130, 0.8), rgba(180, 60, 70, 0.8));
+  border-radius: 100% 0 100% 100%;
+}
+/* Top Left Animation */
+.drop-tl-1 { top: 45%; left: 42%; animation: petalDropTL 6.5s ease-in infinite; animation-delay: 2s; }
+.drop-tl-2 { top: 30%; left: 63%; animation: petalDropTL 7.5s ease-in infinite; animation-delay: 5s; }
+@keyframes petalDropTL {
+  0% { transform: translateY(0) rotate(0); opacity: 0; }
+  10% { opacity: 0.8; }
+  100% { transform: translateY(400px) translateX(80px) rotate(220deg); opacity: 0; }
+}
+/* Top Right Animation (Inside 180deg rotated container!) */
+/* Visually dropping down means local translateY(-400px). Visually moving left means local translateX(80px) */
+.drop-tr-1 { top: 40%; left: 47%; animation: petalDropTR 7s ease-in infinite; animation-delay: 3s; }
+.drop-tr-2 { top: 60%; left: 32%; animation: petalDropTR 8s ease-in infinite; animation-delay: 6s; }
+@keyframes petalDropTR {
+  0% { transform: translateY(0) rotate(0); opacity: 0; }
+  10% { opacity: 0.8; }
+  100% { transform: translateY(-400px) translateX(80px) rotate(-220deg); opacity: 0; }
+}
+
 </style>
 </head>
 <body>
+
+<!-- ─── SPLASH SCREEN / LANDING GATE ─── -->
+<div class="splash-screen" id="splashScreen">
+  <div class="splash-content">
+    
+    <button class="splash-btn" id="enterBtn">Open Invitation</button>
+  </div>
+</div>
+
 <!-- Ambient Music Controller -->
 <div class="audio-control" id="audioControl" title="Play/Pause Music">
   <div class="waveform">
@@ -606,10 +710,15 @@ html, body {
   <div class="border-frame"></div>
 
   <!-- ══ TOP-LEFT: Full cherry blossom branch ══ -->
-    <div class="corner-floral corner-tl"><div class="corner-sway-wrap sway-tl"><img class="corner-img" src="cherry_branch.png" alt=""></div></div>
+    <div class="corner-floral corner-tl"><div class="corner-sway-wrap sway-tl"><img class="corner-img" src="cherry_branch.png" alt="">
+      <div class="drop-flower drop-tl-1"></div>
+      <div class="drop-leaf drop-tl-2"></div></div></div>
 
   <!-- ══ TOP-RIGHT: Large hibiscus / peony-style bloom ══ -->
-    <div class="corner-floral corner-tr"><div class="corner-sway-wrap sway-tr"><img class="corner-img" src="hibiscus_flower.png" alt=""></div></div>
+    <div class="corner-floral corner-tr"><div class="corner-sway-wrap sway-tr">
+      <img class="corner-img" src="hibiscus_flower.png" alt="">
+      <div class="drop-flower drop-tr-1"></div>
+      <div class="drop-leaf drop-tr-2"></div></div></div>
 
   <!-- ══ BOTTOM-LEFT: Elegant rose / peony cluster ══ -->
     <div class="corner-floral corner-bl"><div class="corner-sway-wrap sway-bl"><img class="corner-img" src="hibiscus_flower.png" alt=""></div></div>
@@ -739,9 +848,14 @@ html, body {
 <div class="card">
   <div class="border-frame"></div>
   <!-- Reuse same premium florals -->
-    <div class="corner-floral corner-tl"><div class="corner-sway-wrap sway-tl"><img class="corner-img" src="cherry_branch.png" alt=""></div></div>
+    <div class="corner-floral corner-tl"><div class="corner-sway-wrap sway-tl"><img class="corner-img" src="cherry_branch.png" alt="">
+      <div class="drop-flower drop-tl-1"></div>
+      <div class="drop-leaf drop-tl-2"></div></div></div>
 
-    <div class="corner-floral corner-tr"><div class="corner-sway-wrap sway-tr"><img class="corner-img" src="hibiscus_flower.png" alt=""></div></div>
+    <div class="corner-floral corner-tr"><div class="corner-sway-wrap sway-tr">
+      <img class="corner-img" src="hibiscus_flower.png" alt="">
+      <div class="drop-flower drop-tr-1"></div>
+      <div class="drop-leaf drop-tr-2"></div></div></div>
 
     <div class="corner-floral corner-bl"><div class="corner-sway-wrap sway-bl"><img class="corner-img" src="hibiscus_flower.png" alt=""></div></div>
 
@@ -816,8 +930,13 @@ html, body {
 <div class="page future" id="page2">
 <div class="card">
   <div class="border-frame"></div>
-    <div class="corner-floral corner-tl"><div class="corner-sway-wrap sway-tl"><img class="corner-img" src="cherry_branch.png" alt=""></div></div>
-    <div class="corner-floral corner-tr"><div class="corner-sway-wrap sway-tr"><img class="corner-img" src="hibiscus_flower.png" alt=""></div></div>
+    <div class="corner-floral corner-tl"><div class="corner-sway-wrap sway-tl"><img class="corner-img" src="cherry_branch.png" alt="">
+      <div class="drop-flower drop-tl-1"></div>
+      <div class="drop-leaf drop-tl-2"></div></div></div>
+    <div class="corner-floral corner-tr"><div class="corner-sway-wrap sway-tr">
+      <img class="corner-img" src="hibiscus_flower.png" alt="">
+      <div class="drop-flower drop-tr-1"></div>
+      <div class="drop-leaf drop-tr-2"></div></div></div>
     <div class="corner-floral corner-bl"><div class="corner-sway-wrap sway-bl"><img class="corner-img" src="hibiscus_flower.png" alt=""></div></div>
     <div class="corner-floral corner-br"><div class="corner-sway-wrap sway-br"><img class="corner-img" src="wildflower_bunch.png" alt=""></div></div>
 
@@ -915,9 +1034,9 @@ if (audioBtn && music) {
   }
 
   // Play on first user interaction
-  document.addEventListener('click', autoPlayOnInteraction, { once: true });
-  document.addEventListener('touchstart', autoPlayOnInteraction, { once: true });
-  document.addEventListener('wheel', autoPlayOnInteraction, { once: true });
+  
+  
+  
 
   function autoPlayOnInteraction() {
     if (music.paused) {
@@ -1099,8 +1218,34 @@ function startSpring(target) {
   }
 }
 
+
+// ─── SPLASH SCREEN LOGIC ───
+const splashScreen = document.getElementById('splashScreen');
+const enterBtn = document.getElementById('enterBtn');
+let invitationOpened = false;
+
+if (enterBtn && splashScreen) {
+  enterBtn.addEventListener('click', () => {
+    // Shrink and fade button first for haptic feel
+    enterBtn.style.transition = 'all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+    enterBtn.style.transform = 'scale(0.5)';
+    enterBtn.style.opacity = '0';
+    
+    setTimeout(() => {
+      splashScreen.classList.add('hidden');
+      invitationOpened = true;
+    }, 250);
+    
+    // Auto-play music if not playing
+    if (music && music.paused) {
+      playMusic();
+    }
+  });
+}
+
 // ─── SWIPE & DRAG PHYSICS HANDLERS ───
 function handleDragStart(y) {
+  if (!invitationOpened) return;
   isDragging = true;
   isSpringActive = false; // interrupt active spring transition
   startY = y;
@@ -1212,6 +1357,7 @@ window.addEventListener('mouseup', () => {
 // Mouse scroll wheel physics trigger
 let lastWheelTime = 0;
 document.addEventListener('wheel', e => {
+  if (!invitationOpened) return;
   const now = performance.now();
   if (now - lastWheelTime < 200) return; // throttle scrolling trigger
   
