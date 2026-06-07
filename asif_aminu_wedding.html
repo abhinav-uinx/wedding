@@ -21,25 +21,54 @@
 
 html { scroll-behavior: smooth; }
 
-body {
+html, body {
+  overflow: hidden;
+  height: 100vh;
+  width: 100%;
+  position: relative;
   background: #c8a86a;
   font-family: 'Crimson Text', serif;
-  min-height: 100vh;
 }
 
 /* ─── PAGE WRAPPER ─── */
 .page {
-  display: none;
-  min-height: 100vh;
-  position: relative;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.85s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+  opacity: 0;
+  will-change: transform, opacity;
 }
-.page.active { display: block; }
+.page.active {
+  pointer-events: auto;
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  z-index: 10;
+}
+.page.past {
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(-15%) scale(0.93);
+  z-index: 5;
+}
+.page.future {
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(100%) scale(1);
+  z-index: 20;
+}
 
 /* ─── PARCHMENT CARD ─── */
 .card {
+  width: 100%;
   max-width: 520px;
-  margin: 0 auto;
-  min-height: 100vh;
+  height: 100vh;
   background: url("parchment_bg.png") center center / cover no-repeat;
   position: relative;
   overflow: hidden;
@@ -360,12 +389,7 @@ body {
   border-color:var(--brown);
 }
 
-/* ─── PAGE TRANSITION ─── */
-.page { animation: fadeIn 0.6s ease both; }
-@keyframes fadeIn {
-  from { opacity:0; transform:translateY(16px); }
-  to   { opacity:1; transform:translateY(0); }
-}
+
 
 /* ─── SWIPE HINT ─── */
 .swipe-hint {
@@ -587,7 +611,7 @@ body {
 <!-- ════════════════════════════════
      PAGE 2 — DETAILS
 ════════════════════════════════ -->
-<div class="page" id="page1">
+<div class="page future" id="page1">
 <div class="card">
   <div class="border-frame"></div>
   <!-- Reuse same premium florals -->
@@ -701,7 +725,7 @@ body {
 <!-- ════════════════════════════════
      PAGE 3 — PROGRAMS & LOCATION
 ════════════════════════════════ -->
-<div class="page" id="page2">
+<div class="page future" id="page2">
 <div class="card">
   <div class="border-frame"></div>
     <img class="corner-floral corner-tl" src="cherry_branch.png" alt="">
@@ -814,12 +838,25 @@ const pages = document.querySelectorAll('.page');
 const dots = document.querySelectorAll('.nav-dot');
 
 function goPage(n) {
+  if (n === current) return;
+  
+  // Transition current page out
   pages[current].classList.remove('active');
+  if (n > current) {
+    pages[current].classList.add('past');
+    pages[current].classList.remove('future');
+  } else {
+    pages[current].classList.add('future');
+    pages[current].classList.remove('past');
+  }
   dots[current].classList.remove('active');
+  
+  // Transition new page in
   current = n;
+  pages[current].classList.remove('past', 'future');
   pages[current].classList.add('active');
   dots[current].classList.add('active');
-  window.scrollTo(0,0);
+  
   if (n === pages.length - 1) {
     document.getElementById('swipeHint').style.display = 'none';
   } else {
