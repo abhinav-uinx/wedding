@@ -1,0 +1,1134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Asif & Aminu — 29 June 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Crimson+Text:ital,wght@0,400;0,600;1,400;1,600&family=Amiri:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+
+:root {
+  --parchment:    #e8d5b0;
+  --parchment-dk: #d4b882;
+  --parchment-lt: #f2e4c4;
+  --brown:        #4a2e1a;
+  --brown-md:     #6b3d20;
+  --brown-lt:     #8b5e3c;
+  --brown-faint:  rgba(74,46,26,0.15);
+  --ink:          #3a2010;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: #c8a86a;
+  font-family: 'Crimson Text', serif;
+  min-height: 100vh;
+}
+
+/* ─── PAGE WRAPPER ─── */
+.page {
+  display: none;
+  min-height: 100vh;
+  position: relative;
+}
+.page.active { display: block; }
+
+/* ─── PARCHMENT CARD ─── */
+.card {
+  max-width: 520px;
+  margin: 0 auto;
+  min-height: 100vh;
+  background: url("parchment_bg.png") center center / cover no-repeat;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 8px 60px rgba(0,0,0,0.35);
+}
+
+/* ─── AGED PAPER PATCHES ─── */
+.card::before {
+  content:'';
+  position:absolute; inset:0;
+  background:
+    radial-gradient(ellipse at 15% 75%, rgba(180,130,60,0.25) 0%, transparent 40%),
+    radial-gradient(ellipse at 85% 25%, rgba(160,110,40,0.2) 0%, transparent 35%),
+    radial-gradient(ellipse at 50% 50%, rgba(220,190,130,0.1) 0%, transparent 60%);
+  pointer-events:none; z-index:0;
+}
+
+/* ─── BORDER FRAME ─── */
+.border-frame {
+  position:absolute; inset:18px;
+  border:1px solid rgba(74,46,26,0.25);
+  pointer-events:none; z-index:2;
+}
+.border-frame::before {
+  content:'';
+  position:absolute; inset:5px;
+  border:1px dashed rgba(74,46,26,0.12);
+}
+
+/* ─── CORNER FLORALS (SVG inline) ─── */
+.corner-floral {
+  position:absolute; z-index:3; pointer-events:none;
+}
+.corner-tl { top:0; left:0; }
+.corner-tr { top:0; right:0; transform:scaleX(-1); }
+.corner-bl { bottom:0; left:0; transform:scaleY(-1); }
+.corner-br { bottom:0; right:0; transform:scale(-1,-1); }
+
+/* ─── SIDE VINE BORDERS ─── */
+.vine-left, .vine-right {
+  position:absolute; top:0; bottom:0;
+  width:38px; z-index:3; pointer-events:none;
+}
+.vine-left  { left:0; }
+.vine-right { right:0; transform:scaleX(-1); }
+
+/* ─── HORIZONTAL DIVIDERS ─── */
+.hdiv-top, .hdiv-bot {
+  position:absolute; left:38px; right:38px; z-index:3; pointer-events:none;
+}
+.hdiv-top { top:120px; }
+.hdiv-bot { bottom:120px; }
+
+/* ─── CARD INNER ─── */
+.card-inner {
+  position:relative; z-index:4;
+  padding:50px 70px 60px;
+  text-align:center;
+}
+
+/* ─── TYPOGRAPHY ─── */
+.arabic-verse {
+  font-family:'Amiri', serif;
+  font-size: clamp(1.3rem,3.5vw,1.7rem);
+  color: var(--brown);
+  direction:rtl;
+  line-height:1.6;
+  margin-bottom:28px;
+  opacity:0.9;
+}
+
+.arabic-mono {
+  font-family:'Amiri', serif;
+  font-size: clamp(3.5rem,12vw,5.5rem);
+  color: var(--brown-md);
+  direction:rtl;
+  line-height:1;
+  margin-bottom:24px;
+}
+
+.couple-names {
+  font-family:'Playfair Display', serif;
+  font-size: clamp(2rem,7vw,2.8rem);
+  color: var(--brown);
+  font-weight:400;
+  line-height:1.25;
+  margin-bottom: 8px;
+  letter-spacing: 0.01em;
+}
+.couple-names .amp {
+  font-style:italic;
+  color:var(--brown-md);
+}
+
+.names-large {
+  font-family:'Playfair Display', serif;
+  font-size: clamp(1.9rem,6.5vw,2.6rem);
+  color: var(--brown);
+  font-weight:600;
+  margin-bottom:6px;
+}
+
+.date-line {
+  font-family:'Crimson Text', serif;
+  font-size: clamp(0.9rem,2.5vw,1.05rem);
+  color: var(--brown-md);
+  font-weight:600;
+  letter-spacing:0.12em;
+  text-transform:uppercase;
+  margin-bottom:4px;
+}
+
+.subtitle {
+  font-family:'Crimson Text', serif;
+  font-size: clamp(0.8rem,2.2vw,0.95rem);
+  color: var(--brown-lt);
+  letter-spacing:0.1em;
+  margin-bottom:20px;
+}
+
+.family-names {
+  font-family:'Crimson Text', serif;
+  font-style:italic;
+  font-size: clamp(1rem,2.8vw,1.15rem);
+  color: var(--brown);
+  font-weight:600;
+  margin-bottom:4px;
+  line-height:1.5;
+}
+
+.invite-text {
+  font-family:'Crimson Text', serif;
+  font-style:italic;
+  font-size: clamp(0.9rem,2.4vw,1rem);
+  color: var(--brown-lt);
+  margin-bottom:20px;
+  line-height:1.6;
+}
+
+.gs-text {
+  font-family:'Crimson Text', serif;
+  font-size: clamp(0.8rem,2.2vw,0.9rem);
+  color: var(--brown-lt);
+  line-height:1.7;
+  margin-bottom:16px;
+}
+
+.venue-name {
+  font-family:'Playfair Display', serif;
+  font-style:italic;
+  font-size: clamp(1rem,3vw,1.2rem);
+  color: var(--brown);
+  font-weight:600;
+  margin-bottom:2px;
+}
+
+.venue-place {
+  font-family:'Playfair Display', serif;
+  font-style:italic;
+  font-size: clamp(1rem,3vw,1.2rem);
+  color: var(--brown);
+  font-weight:600;
+}
+
+.ornament-divider {
+  display:flex; align-items:center; gap:10px;
+  justify-content:center;
+  margin: 18px 0;
+  color:var(--brown-lt);
+  font-size:1.1rem;
+  opacity:0.6;
+}
+.ornament-divider::before,
+.ornament-divider::after {
+  content:'';
+  flex:1; max-width:80px; height:1px;
+  background:linear-gradient(90deg,transparent,var(--brown-lt),transparent);
+}
+
+/* ─── PAGE 3 SPECIFIC ─── */
+.programs-title {
+  font-family:'Playfair Display', serif;
+  font-style:italic;
+  font-weight:600;
+  font-size: clamp(1.1rem,3vw,1.3rem);
+  color: var(--brown);
+  margin-bottom:14px;
+}
+
+.program-item {
+  font-family:'Crimson Text', serif;
+  font-size: clamp(0.95rem,2.5vw,1.05rem);
+  color: var(--brown-md);
+  margin-bottom:6px;
+  line-height:1.6;
+}
+
+.closing-text {
+  font-family:'Crimson Text', serif;
+  font-size: clamp(0.85rem,2.3vw,0.95rem);
+  color: var(--brown-lt);
+  line-height:1.85;
+  margin-bottom:28px;
+  text-align:center;
+}
+
+/* ─── LOCATION BUTTON ─── */
+.location-btn {
+  display:inline-block;
+  border:2px solid var(--brown);
+  padding:10px 36px;
+  font-family:'Crimson Text', serif;
+  font-size:0.95rem;
+  font-weight:600;
+  color:var(--brown);
+  letter-spacing:0.15em;
+  text-transform:uppercase;
+  cursor:pointer;
+  background:transparent;
+  transition:all 0.3s;
+  text-decoration:none;
+  margin-bottom:28px;
+}
+.location-btn:hover {
+  background:rgba(74,46,26,0.1);
+}
+
+/* ─── COUNTDOWN ─── */
+.countdown-wrap {
+  background: rgba(255, 255, 255, 0.45);
+  border: 1px solid rgba(74, 46, 26, 0.15);
+  padding: 12px 20px;
+  display: inline-block;
+  margin: 0 auto 10px;
+  border-radius: 4px;
+  box-shadow: 0 2px 10px rgba(74, 46, 26, 0.05);
+}
+.countdown-label {
+  font-family: 'Crimson Text', serif;
+  font-style: italic;
+  font-size: 0.85rem;
+  color: var(--brown-lt);
+  margin-bottom: 8px;
+  letter-spacing: 0.05em;
+}
+.countdown {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+}
+.c-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 42px;
+}
+.c-num {
+  font-family: monospace, sans-serif;
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: var(--ink);
+  line-height: 1.1;
+}
+.c-num.red {
+  color: #c0392b;
+}
+.c-lbl {
+  font-family: 'Crimson Text', serif;
+  font-size: 0.55rem;
+  color: var(--brown-lt);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-top: 2px;
+}
+.c-sep {
+  font-family: monospace, sans-serif;
+  font-size: 1.2rem;
+  color: var(--brown-md);
+  margin-top: -10px;
+}
+
+/* ─── NAV DOTS ─── */
+.nav-dots {
+  position:fixed;
+  right:20px; top:50%;
+  transform:translateY(-50%);
+  display:flex; flex-direction:column; gap:10px;
+  z-index:100;
+}
+.nav-dot {
+  width:10px; height:10px;
+  border-radius:50%;
+  border:2px solid var(--brown-lt);
+  background:transparent;
+  cursor:pointer;
+  transition:all 0.3s;
+}
+.nav-dot.active {
+  background:var(--brown);
+  border-color:var(--brown);
+}
+
+/* ─── PAGE TRANSITION ─── */
+.page { animation: fadeIn 0.6s ease both; }
+@keyframes fadeIn {
+  from { opacity:0; transform:translateY(16px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+
+/* ─── SWIPE HINT ─── */
+.swipe-hint {
+  position:fixed; bottom:18px; left:50%; transform:translateX(-50%);
+  font-family:'Crimson Text',serif; font-style:italic;
+  font-size:0.78rem; color:rgba(74,46,26,0.55);
+  letter-spacing:0.1em; z-index:100;
+  animation: blink 2.5s ease-in-out infinite;
+  pointer-events:none;
+}
+@keyframes blink {
+  0%,100% { opacity:0.4; } 50% { opacity:1; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV DOTS -->
+<div class="nav-dots">
+  <div class="nav-dot active" onclick="goPage(0)"></div>
+  <div class="nav-dot" onclick="goPage(1)"></div>
+  <div class="nav-dot" onclick="goPage(2)"></div>
+</div>
+
+<div class="swipe-hint" id="swipeHint">scroll or tap dots to navigate ↓</div>
+
+<!-- ════════════════════════════════
+     PAGE 1 — COVER
+════════════════════════════════ -->
+<div class="page active" id="page0">
+<div class="card">
+  <!-- BORDER -->
+  <div class="border-frame"></div>
+
+  <!-- TOP-LEFT FLORAL -->
+  <svg class="corner-floral corner-tl" width="190" height="200" viewBox="0 0 190 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <!-- cherry blossom branch -->
+    <line x1="30" y1="200" x2="80" y2="80" stroke="#4a2e1a" stroke-width="1.5" opacity="0.5"/>
+    <line x1="80" y1="80" x2="110" y2="30" stroke="#4a2e1a" stroke-width="1.2" opacity="0.5"/>
+    <line x1="80" y1="80" x2="140" y2="60" stroke="#4a2e1a" stroke-width="1" opacity="0.45"/>
+    <line x1="80" y1="80" x2="60" y2="40" stroke="#4a2e1a" stroke-width="1" opacity="0.4"/>
+    <line x1="60" y1="140" x2="40" y2="110" stroke="#4a2e1a" stroke-width="0.8" opacity="0.35"/>
+    <line x1="60" y1="140" x2="90" y2="120" stroke="#4a2e1a" stroke-width="0.8" opacity="0.35"/>
+    <!-- small blossoms -->
+    <g transform="translate(108,28)" opacity="0.7">
+      <ellipse cx="0" cy="-8" rx="5" ry="8" fill="none" stroke="#4a2e1a" stroke-width="1" transform="rotate(0)"/>
+      <ellipse cx="0" cy="-8" rx="5" ry="8" fill="none" stroke="#4a2e1a" stroke-width="1" transform="rotate(72)"/>
+      <ellipse cx="0" cy="-8" rx="5" ry="8" fill="none" stroke="#4a2e1a" stroke-width="1" transform="rotate(144)"/>
+      <ellipse cx="0" cy="-8" rx="5" ry="8" fill="none" stroke="#4a2e1a" stroke-width="1" transform="rotate(216)"/>
+      <ellipse cx="0" cy="-8" rx="5" ry="8" fill="none" stroke="#4a2e1a" stroke-width="1" transform="rotate(288)"/>
+      <circle cx="0" cy="0" r="2.5" fill="none" stroke="#4a2e1a" stroke-width="0.8"/>
+    </g>
+    <g transform="translate(58,38)" opacity="0.65">
+      <ellipse cx="0" cy="-7" rx="4.5" ry="7" fill="none" stroke="#4a2e1a" stroke-width="1" transform="rotate(0)"/>
+      <ellipse cx="0" cy="-7" rx="4.5" ry="7" fill="none" stroke="#4a2e1a" stroke-width="1" transform="rotate(72)"/>
+      <ellipse cx="0" cy="-7" rx="4.5" ry="7" fill="none" stroke="#4a2e1a" stroke-width="1" transform="rotate(144)"/>
+      <ellipse cx="0" cy="-7" rx="4.5" ry="7" fill="none" stroke="#4a2e1a" stroke-width="1" transform="rotate(216)"/>
+      <ellipse cx="0" cy="-7" rx="4.5" ry="7" fill="none" stroke="#4a2e1a" stroke-width="1" transform="rotate(288)"/>
+      <circle cx="0" cy="0" r="2" fill="none" stroke="#4a2e1a" stroke-width="0.8"/>
+    </g>
+    <g transform="translate(138,60)" opacity="0.6">
+      <ellipse cx="0" cy="-6" rx="4" ry="6" fill="none" stroke="#4a2e1a" stroke-width="0.9" transform="rotate(0)"/>
+      <ellipse cx="0" cy="-6" rx="4" ry="6" fill="none" stroke="#4a2e1a" stroke-width="0.9" transform="rotate(72)"/>
+      <ellipse cx="0" cy="-6" rx="4" ry="6" fill="none" stroke="#4a2e1a" stroke-width="0.9" transform="rotate(144)"/>
+      <ellipse cx="0" cy="-6" rx="4" ry="6" fill="none" stroke="#4a2e1a" stroke-width="0.9" transform="rotate(216)"/>
+      <ellipse cx="0" cy="-6" rx="4" ry="6" fill="none" stroke="#4a2e1a" stroke-width="0.9" transform="rotate(288)"/>
+    </g>
+    <!-- berries -->
+    <circle cx="170" cy="55" r="5" fill="none" stroke="#4a2e1a" stroke-width="1" opacity="0.55"/>
+    <circle cx="158" cy="48" r="4" fill="none" stroke="#4a2e1a" stroke-width="1" opacity="0.5"/>
+    <circle cx="176" cy="45" r="3.5" fill="none" stroke="#4a2e1a" stroke-width="0.9" opacity="0.45"/>
+    <circle cx="162" cy="40" r="3" fill="none" stroke="#4a2e1a" stroke-width="0.9" opacity="0.4"/>
+    <line x1="160" y1="32" x2="168" y2="52" stroke="#4a2e1a" stroke-width="0.8" opacity="0.4"/>
+    <line x1="168" y1="32" x2="162" y2="50" stroke="#4a2e1a" stroke-width="0.8" opacity="0.35"/>
+  </svg>
+
+  <!-- TOP-RIGHT FLORAL (large single flower) -->
+  <svg class="corner-floral corner-tr" width="170" height="190" viewBox="0 0 170 190" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <g transform="translate(72,80)" opacity="0.65">
+      <ellipse cx="0" cy="-42" rx="24" ry="42" fill="none" stroke="#4a2e1a" stroke-width="1.4" transform="rotate(0)"/>
+      <ellipse cx="0" cy="-42" rx="24" ry="42" fill="none" stroke="#4a2e1a" stroke-width="1.4" transform="rotate(72)"/>
+      <ellipse cx="0" cy="-42" rx="24" ry="42" fill="none" stroke="#4a2e1a" stroke-width="1.4" transform="rotate(144)"/>
+      <ellipse cx="0" cy="-42" rx="24" ry="42" fill="none" stroke="#4a2e1a" stroke-width="1.4" transform="rotate(216)"/>
+      <ellipse cx="0" cy="-42" rx="24" ry="42" fill="none" stroke="#4a2e1a" stroke-width="1.4" transform="rotate(288)"/>
+      <!-- veins -->
+      <line x1="0" y1="-10" x2="4" y2="-44" stroke="#4a2e1a" stroke-width="0.6" opacity="0.4" transform="rotate(0)"/>
+      <line x1="0" y1="-10" x2="4" y2="-44" stroke="#4a2e1a" stroke-width="0.6" opacity="0.4" transform="rotate(72)"/>
+      <line x1="0" y1="-10" x2="4" y2="-44" stroke="#4a2e1a" stroke-width="0.6" opacity="0.4" transform="rotate(144)"/>
+      <line x1="0" y1="-10" x2="4" y2="-44" stroke="#4a2e1a" stroke-width="0.6" opacity="0.4" transform="rotate(216)"/>
+      <line x1="0" y1="-10" x2="4" y2="-44" stroke="#4a2e1a" stroke-width="0.6" opacity="0.4" transform="rotate(288)"/>
+      <circle cx="0" cy="0" r="11" fill="none" stroke="#4a2e1a" stroke-width="1.3"/>
+      <circle cx="0" cy="0" r="5" fill="none" stroke="#4a2e1a" stroke-width="0.8"/>
+    </g>
+    <!-- stem -->
+    <path d="M72,100 Q55,130 30,190" stroke="#4a2e1a" stroke-width="1.2" opacity="0.4" fill="none"/>
+    <!-- berries -->
+    <circle cx="130" cy="20" r="5" fill="none" stroke="#4a2e1a" stroke-width="1" opacity="0.45"/>
+    <circle cx="143" cy="14" r="4" fill="none" stroke="#4a2e1a" stroke-width="0.9" opacity="0.4"/>
+    <circle cx="120" cy="12" r="3.5" fill="none" stroke="#4a2e1a" stroke-width="0.9" opacity="0.38"/>
+    <line x1="120" y1="5" x2="132" y2="22" stroke="#4a2e1a" stroke-width="0.8" opacity="0.35"/>
+  </svg>
+
+  <!-- BOTTOM-LEFT FLORAL (large hibiscus-like) -->
+  <svg class="corner-floral corner-bl" width="170" height="190" viewBox="0 0 170 190" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <g transform="translate(72,80)" opacity="0.65">
+      <ellipse cx="0" cy="-42" rx="24" ry="42" fill="none" stroke="#4a2e1a" stroke-width="1.4" transform="rotate(0)"/>
+      <ellipse cx="0" cy="-42" rx="24" ry="42" fill="none" stroke="#4a2e1a" stroke-width="1.4" transform="rotate(72)"/>
+      <ellipse cx="0" cy="-42" rx="24" ry="42" fill="none" stroke="#4a2e1a" stroke-width="1.4" transform="rotate(144)"/>
+      <ellipse cx="0" cy="-42" rx="24" ry="42" fill="none" stroke="#4a2e1a" stroke-width="1.4" transform="rotate(216)"/>
+      <ellipse cx="0" cy="-42" rx="24" ry="42" fill="none" stroke="#4a2e1a" stroke-width="1.4" transform="rotate(288)"/>
+      <!-- veins -->
+      <line x1="0" y1="-10" x2="4" y2="-44" stroke="#4a2e1a" stroke-width="0.6" opacity="0.4" transform="rotate(0)"/>
+      <line x1="0" y1="-10" x2="4" y2="-44" stroke="#4a2e1a" stroke-width="0.6" opacity="0.4" transform="rotate(72)"/>
+      <line x1="0" y1="-10" x2="4" y2="-44" stroke="#4a2e1a" stroke-width="0.6" opacity="0.4" transform="rotate(144)"/>
+      <line x1="0" y1="-10" x2="4" y2="-44" stroke="#4a2e1a" stroke-width="0.6" opacity="0.4" transform="rotate(216)"/>
+      <line x1="0" y1="-10" x2="4" y2="-44" stroke="#4a2e1a" stroke-width="0.6" opacity="0.4" transform="rotate(288)"/>
+      <circle cx="0" cy="0" r="11" fill="none" stroke="#4a2e1a" stroke-width="1.3"/>
+      <circle cx="0" cy="0" r="5" fill="none" stroke="#4a2e1a" stroke-width="0.8"/>
+    </g>
+    <!-- stem -->
+    <path d="M72,100 Q55,130 30,190" stroke="#4a2e1a" stroke-width="1.2" opacity="0.4" fill="none"/>
+    <!-- berries bottom left -->
+    <circle cx="130" cy="20" r="5" fill="none" stroke="#4a2e1a" stroke-width="1" opacity="0.45"/>
+    <circle cx="143" cy="14" r="4" fill="none" stroke="#4a2e1a" stroke-width="0.9" opacity="0.4"/>
+    <circle cx="120" cy="12" r="3.5" fill="none" stroke="#4a2e1a" stroke-width="0.9" opacity="0.38"/>
+    <line x1="120" y1="5" x2="132" y2="22" stroke="#4a2e1a" stroke-width="0.8" opacity="0.35"/>
+  </svg>
+
+  <!-- BOTTOM-RIGHT FLORAL (smaller wildflowers) -->
+  <svg class="corner-floral corner-br" width="155" height="175" viewBox="0 0 155 175" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <!-- wildflower bunch -->
+    <line x1="60" y1="175" x2="70" y2="100" stroke="#4a2e1a" stroke-width="1.2" opacity="0.45"/>
+    <line x1="70" y1="100" x2="90" y2="50" stroke="#4a2e1a" stroke-width="1.1" opacity="0.45"/>
+    <line x1="70" y1="100" x2="110" y2="70" stroke="#4a2e1a" stroke-width="1" opacity="0.4"/>
+    <line x1="70" y1="100" x2="45" y2="65" stroke="#4a2e1a" stroke-width="1" opacity="0.4"/>
+    <line x1="80" y1="140" x2="100" y2="120" stroke="#4a2e1a" stroke-width="0.8" opacity="0.35"/>
+    <!-- flower 1 -->
+    <g transform="translate(89,48)" opacity="0.6">
+      <ellipse cx="0" cy="-10" rx="6" ry="11" fill="none" stroke="#4a2e1a" stroke-width="1" transform="rotate(0)"/>
+      <ellipse cx="0" cy="-10" rx="6" ry="11" fill="none" stroke="#4a2e1a" stroke-width="1" transform="rotate(60)"/>
+      <ellipse cx="0" cy="-10" rx="6" ry="11" fill="none" stroke="#4a2e1a" stroke-width="1" transform="rotate(120)"/>
+      <ellipse cx="0" cy="-10" rx="6" ry="11" fill="none" stroke="#4a2e1a" stroke-width="1" transform="rotate(180)"/>
+      <ellipse cx="0" cy="-10" rx="6" ry="11" fill="none" stroke="#4a2e1a" stroke-width="1" transform="rotate(240)"/>
+      <ellipse cx="0" cy="-10" rx="6" ry="11" fill="none" stroke="#4a2e1a" stroke-width="1" transform="rotate(300)"/>
+      <circle cx="0" cy="0" r="4" fill="none" stroke="#4a2e1a" stroke-width="0.9"/>
+    </g>
+    <!-- flower 2 -->
+    <g transform="translate(110,68)" opacity="0.55">
+      <ellipse cx="0" cy="-9" rx="5.5" ry="10" fill="none" stroke="#4a2e1a" stroke-width="1" transform="rotate(0)"/>
+      <ellipse cx="0" cy="-9" rx="5.5" ry="10" fill="none" stroke="#4a2e1a" stroke-width="1" transform="rotate(60)"/>
+      <ellipse cx="0" cy="-9" rx="5.5" ry="10" fill="none" stroke="#4a2e1a" stroke-width="1" transform="rotate(120)"/>
+      <ellipse cx="0" cy="-9" rx="5.5" ry="10" fill="none" stroke="#4a2e1a" stroke-width="1" transform="rotate(180)"/>
+      <ellipse cx="0" cy="-9" rx="5.5" ry="10" fill="none" stroke="#4a2e1a" stroke-width="1" transform="rotate(240)"/>
+      <ellipse cx="0" cy="-9" rx="5.5" ry="10" fill="none" stroke="#4a2e1a" stroke-width="1" transform="rotate(300)"/>
+      <circle cx="0" cy="0" r="3.5" fill="none" stroke="#4a2e1a" stroke-width="0.8"/>
+    </g>
+    <!-- buds -->
+    <g transform="translate(45,62)">
+      <ellipse cx="0" cy="-8" rx="4" ry="8" fill="none" stroke="#4a2e1a" stroke-width="1" opacity="0.5"/>
+      <line x1="-3" y1="-5" x2="-8" y2="-2" stroke="#4a2e1a" stroke-width="0.7" opacity="0.4"/>
+      <line x1="-3" y1="-5" x2="-9" y2="-8" stroke="#4a2e1a" stroke-width="0.7" opacity="0.4"/>
+    </g>
+  </svg>
+
+  <!-- LEFT VINE -->
+  <svg class="vine-left" viewBox="0 0 38 900" preserveAspectRatio="xMidYMid meet" fill="none" xmlns="http://www.w3.org/2000/svg" opacity="0.45">
+    <path d="M19,0 Q19,900 19,900" stroke="#4a2e1a" stroke-width="0.5" opacity="0.2"/>
+    <!-- repeating vine pattern -->
+    <g id="vine-unit">
+      <!-- arrow/branch motifs repeating -->
+    </g>
+    <!-- hand-drawn vine motifs -->
+    <g opacity="0.55" font-family="serif">
+      <!-- top deco border repeat -->
+      <text x="19" y="145" text-anchor="middle" font-size="10" fill="#4a2e1a" transform="rotate(-90,19,145)">❧ ❧ ❧ ❧ ❧</text>
+    </g>
+    <!-- arrow leaves going down -->
+    <line x1="19" y1="130" x2="19" y2="870" stroke="#4a2e1a" stroke-width="0.6" opacity="0.3" stroke-dasharray="2,8"/>
+    <!-- small arrowhead leaves -->
+    <path d="M14,160 L19,150 L24,160" fill="none" stroke="#4a2e1a" stroke-width="0.9" opacity="0.5"/>
+    <path d="M12,185 L19,175 L26,185" fill="none" stroke="#4a2e1a" stroke-width="0.9" opacity="0.45"/>
+    <path d="M14,215 L19,205 L24,215" fill="none" stroke="#4a2e1a" stroke-width="0.9" opacity="0.5"/>
+    <path d="M12,245 L19,235 L26,245" fill="none" stroke="#4a2e1a" stroke-width="0.9" opacity="0.45"/>
+    <path d="M14,278 L19,268 L24,278" fill="none" stroke="#4a2e1a" stroke-width="0.9" opacity="0.5"/>
+    <path d="M12,310 L19,300 L26,310" fill="none" stroke="#4a2e1a" stroke-width="0.9" opacity="0.45"/>
+    <path d="M14,342 L19,332 L24,342" fill="none" stroke="#4a2e1a" stroke-width="0.9" opacity="0.5"/>
+    <path d="M12,374 L19,364 L26,374" fill="none" stroke="#4a2e1a" stroke-width="0.9" opacity="0.45"/>
+    <path d="M14,406 L19,396 L24,406" fill="none" stroke="#4a2e1a" stroke-width="0.9" opacity="0.5"/>
+    <path d="M12,438 L19,428 L26,438" fill="none" stroke="#4a2e1a" stroke-width="0.9" opacity="0.45"/>
+    <path d="M14,470 L19,460 L24,470" fill="none" stroke="#4a2e1a" stroke-width="0.9" opacity="0.5"/>
+    <path d="M12,502 L19,492 L26,502" fill="none" stroke="#4a2e1a" stroke-width="0.9" opacity="0.45"/>
+    <path d="M14,534 L19,524 L24,534" fill="none" stroke="#4a2e1a" stroke-width="0.9" opacity="0.5"/>
+    <path d="M12,566 L19,556 L26,566" fill="none" stroke="#4a2e1a" stroke-width="0.9" opacity="0.45"/>
+    <path d="M14,598 L19,588 L24,598" fill="none" stroke="#4a2e1a" stroke-width="0.9" opacity="0.5"/>
+    <path d="M12,630 L19,620 L26,630" fill="none" stroke="#4a2e1a" stroke-width="0.9" opacity="0.45"/>
+    <path d="M14,662 L19,652 L24,662" fill="none" stroke="#4a2e1a" stroke-width="0.9" opacity="0.5"/>
+    <path d="M12,694 L19,684 L26,694" fill="none" stroke="#4a2e1a" stroke-width="0.9" opacity="0.45"/>
+    <path d="M14,726 L19,716 L24,726" fill="none" stroke="#4a2e1a" stroke-width="0.9" opacity="0.5"/>
+    <path d="M12,758 L19,748 L26,758" fill="none" stroke="#4a2e1a" stroke-width="0.9" opacity="0.45"/>
+    <path d="M14,790 L19,780 L24,790" fill="none" stroke="#4a2e1a" stroke-width="0.9" opacity="0.5"/>
+    <path d="M12,822 L19,812 L26,822" fill="none" stroke="#4a2e1a" stroke-width="0.9" opacity="0.45"/>
+    <path d="M14,854 L19,844 L24,854" fill="none" stroke="#4a2e1a" stroke-width="0.9" opacity="0.5"/>
+    <!-- side hearts/leaves -->
+    <path d="M8,172 Q6,168 10,166 Q14,164 12,168 Q16,164 18,167 Q14,162 12,168Z" fill="#4a2e1a" opacity="0.3" transform="scale(0.8) translate(2,5)"/>
+    <path d="M8,232 Q6,228 10,226 Q14,224 12,228 Q16,224 18,227 Q14,222 12,228Z" fill="#4a2e1a" opacity="0.25" transform="scale(0.8) translate(2,5)"/>
+    <path d="M8,292 Q6,288 10,286 Q14,284 12,288 Q16,284 18,287 Q14,282 12,288Z" fill="#4a2e1a" opacity="0.3" transform="scale(0.8) translate(2,5)"/>
+    <path d="M8,352 Q6,348 10,346 Q14,344 12,348 Q16,344 18,347 Q14,342 12,348Z" fill="#4a2e1a" opacity="0.25" transform="scale(0.8) translate(2,5)"/>
+    <path d="M8,412 Q6,408 10,406 Q14,404 12,408 Q16,404 18,407 Q14,402 12,408Z" fill="#4a2e1a" opacity="0.3" transform="scale(0.8) translate(2,5)"/>
+    <path d="M8,472 Q6,468 10,466 Q14,464 12,468 Q16,464 18,467 Q14,462 12,468Z" fill="#4a2e1a" opacity="0.25" transform="scale(0.8) translate(2,5)"/>
+    <path d="M8,532 Q6,528 10,526 Q14,524 12,528 Q16,524 18,527 Q14,522 12,528Z" fill="#4a2e1a" opacity="0.3" transform="scale(0.8) translate(2,5)"/>
+    <path d="M8,592 Q6,588 10,586 Q14,584 12,588 Q16,584 18,587 Q14,582 12,588Z" fill="#4a2e1a" opacity="0.25" transform="scale(0.8) translate(2,5)"/>
+    <path d="M8,652 Q6,648 10,646 Q14,644 12,648 Q16,644 18,647 Q14,642 12,648Z" fill="#4a2e1a" opacity="0.3" transform="scale(0.8) translate(2,5)"/>
+    <path d="M8,712 Q6,708 10,706 Q14,704 12,708 Q16,704 18,707 Q14,702 12,708Z" fill="#4a2e1a" opacity="0.25" transform="scale(0.8) translate(2,5)"/>
+    <path d="M8,772 Q6,768 10,766 Q14,764 12,768 Q16,764 18,767 Q14,762 12,768Z" fill="#4a2e1a" opacity="0.3" transform="scale(0.8) translate(2,5)"/>
+    <path d="M8,832 Q6,828 10,826 Q14,824 12,828 Q16,824 18,827 Q14,822 12,828Z" fill="#4a2e1a" opacity="0.25" transform="scale(0.8) translate(2,5)"/>
+    <!-- dots -->
+    <circle cx="19" cy="200" r="1.5" fill="#4a2e1a" opacity="0.35"/>
+    <circle cx="19" cy="270" r="1.5" fill="#4a2e1a" opacity="0.3"/>
+    <circle cx="19" cy="340" r="1.5" fill="#4a2e1a" opacity="0.35"/>
+    <circle cx="19" cy="410" r="1.5" fill="#4a2e1a" opacity="0.3"/>
+    <circle cx="19" cy="480" r="1.5" fill="#4a2e1a" opacity="0.35"/>
+    <circle cx="19" cy="550" r="1.5" fill="#4a2e1a" opacity="0.3"/>
+    <circle cx="19" cy="620" r="1.5" fill="#4a2e1a" opacity="0.35"/>
+    <circle cx="19" cy="690" r="1.5" fill="#4a2e1a" opacity="0.3"/>
+    <circle cx="19" cy="760" r="1.5" fill="#4a2e1a" opacity="0.35"/>
+    <circle cx="19" cy="830" r="1.5" fill="#4a2e1a" opacity="0.3"/>
+  </svg>
+
+  <svg class="vine-right" viewBox="0 0 38 900" preserveAspectRatio="xMidYMid meet" fill="none" xmlns="http://www.w3.org/2000/svg" opacity="0.45">
+    <line x1="19" y1="130" x2="19" y2="870" stroke="#4a2e1a" stroke-width="0.6" opacity="0.3" stroke-dasharray="2,8"/>
+    <path d="M14,160 L19,150 L24,160" fill="none" stroke="#4a2e1a" stroke-width="0.9" opacity="0.5"/>
+    <path d="M12,185 L19,175 L26,185" fill="none" stroke="#4a2e1a" stroke-width="0.9" opacity="0.45"/>
+    <path d="M14,215 L19,205 L24,215" fill="none" stroke="#4a2e1a" stroke-width="0.9" opacity="0.5"/>
+    <path d="M12,245 L19,235 L26,245" fill="none" stroke="#4a2e1a" stroke-width="0.9" opacity="0.45"/>
+    <path d="M14,278 L19,268 L24,278" fill="none" stroke="#4a2e1a" stroke-width="0.9" opacity="0.5"/>
+    <path d="M12,310 L19,300 L26,310" fill="none" stroke="#4a2e1a" stroke-width="0.9" opacity="0.45"/>
+    <path d="M14,342 L19,332 L24,342" fill="none" stroke="#4a2e1a" stroke-width="0.9" opacity="0.5"/>
+    <path d="M12,374 L19,364 L26,374" fill="none" stroke="#4a2e1a" stroke-width="0.9" opacity="0.45"/>
+    <path d="M14,406 L19,396 L24,406" fill="none" stroke="#4a2e1a" stroke-width="0.9" opacity="0.5"/>
+    <path d="M12,438 L19,428 L26,438" fill="none" stroke="#4a2e1a" stroke-width="0.9" opacity="0.45"/>
+    <path d="M14,470 L19,460 L24,470" fill="none" stroke="#4a2e1a" stroke-width="0.9" opacity="0.5"/>
+    <path d="M12,502 L19,492 L26,502" fill="none" stroke="#4a2e1a" stroke-width="0.9" opacity="0.45"/>
+    <path d="M14,534 L19,524 L24,534" fill="none" stroke="#4a2e1a" stroke-width="0.9" opacity="0.5"/>
+    <path d="M12,566 L19,556 L26,566" fill="none" stroke="#4a2e1a" stroke-width="0.9" opacity="0.45"/>
+    <path d="M14,598 L19,588 L24,598" fill="none" stroke="#4a2e1a" stroke-width="0.9" opacity="0.5"/>
+    <path d="M12,630 L19,620 L26,630" fill="none" stroke="#4a2e1a" stroke-width="0.9" opacity="0.45"/>
+    <path d="M14,662 L19,652 L24,662" fill="none" stroke="#4a2e1a" stroke-width="0.9" opacity="0.5"/>
+    <path d="M12,694 L19,684 L26,694" fill="none" stroke="#4a2e1a" stroke-width="0.9" opacity="0.45"/>
+    <path d="M14,726 L19,716 L24,726" fill="none" stroke="#4a2e1a" stroke-width="0.9" opacity="0.5"/>
+    <path d="M12,758 L19,748 L26,758" fill="none" stroke="#4a2e1a" stroke-width="0.9" opacity="0.45"/>
+    <path d="M14,790 L19,780 L24,790" fill="none" stroke="#4a2e1a" stroke-width="0.9" opacity="0.5"/>
+    <path d="M12,822 L19,812 L26,822" fill="none" stroke="#4a2e1a" stroke-width="0.9" opacity="0.45"/>
+    <path d="M8,232 Q6,228 10,226 Q14,224 12,228 Q16,224 18,227 Q14,222 12,228Z" fill="#4a2e1a" opacity="0.25" transform="scale(0.8) translate(2,5)"/>
+    <path d="M8,352 Q6,348 10,346 Q14,344 12,348 Q16,344 18,347 Q14,342 12,348Z" fill="#4a2e1a" opacity="0.25" transform="scale(0.8) translate(2,5)"/>
+    <path d="M8,472 Q6,468 10,466 Q14,464 12,468 Q16,464 18,467 Q14,462 12,468Z" fill="#4a2e1a" opacity="0.25" transform="scale(0.8) translate(2,5)"/>
+    <path d="M8,592 Q6,588 10,586 Q14,584 12,588 Q16,584 18,587 Q14,582 12,588Z" fill="#4a2e1a" opacity="0.25" transform="scale(0.8) translate(2,5)"/>
+    <path d="M8,712 Q6,708 10,706 Q14,704 12,708 Q16,704 18,707 Q14,702 12,708Z" fill="#4a2e1a" opacity="0.25" transform="scale(0.8) translate(2,5)"/>
+    <path d="M8,832 Q6,828 10,826 Q14,824 12,828 Q16,824 18,827 Q14,822 12,828Z" fill="#4a2e1a" opacity="0.25" transform="scale(0.8) translate(2,5)"/>
+    <circle cx="19" cy="200" r="1.5" fill="#4a2e1a" opacity="0.35"/>
+    <circle cx="19" cy="340" r="1.5" fill="#4a2e1a" opacity="0.35"/>
+    <circle cx="19" cy="480" r="1.5" fill="#4a2e1a" opacity="0.35"/>
+    <circle cx="19" cy="620" r="1.5" fill="#4a2e1a" opacity="0.35"/>
+    <circle cx="19" cy="760" r="1.5" fill="#4a2e1a" opacity="0.35"/>
+  </svg>
+
+  <!-- HORIZONTAL TOP BORDER -->
+  <svg class="hdiv-top" height="18" viewBox="0 0 440 18" preserveAspectRatio="xMidYMid meet" fill="none" xmlns="http://www.w3.org/2000/svg" opacity="0.5">
+    <line x1="0" y1="9" x2="440" y2="9" stroke="#4a2e1a" stroke-width="0.5" opacity="0.4"/>
+    <path d="M0,9 L440,9" stroke="#4a2e1a" stroke-width="0.5" stroke-dasharray="3,6" opacity="0.3"/>
+    <!-- arrow motifs -->
+    <g fill="none" stroke="#4a2e1a" stroke-width="0.8" opacity="0.6">
+      <path d="M20,5 L30,9 L20,13"/> <path d="M40,5 L50,9 L40,13"/>
+      <path d="M60,5 L70,9 L60,13"/> <path d="M80,5 L90,9 L80,13"/>
+      <path d="M100,5 L110,9 L100,13"/> <path d="M120,5 L130,9 L120,13"/>
+      <path d="M140,5 L150,9 L140,13"/> <path d="M160,5 L170,9 L160,13"/>
+      <path d="M180,5 L190,9 L180,13"/> <path d="M200,5 L210,9 L200,13"/>
+      <path d="M220,5 L230,9 L220,13"/> <path d="M240,5 L250,9 L240,13"/>
+      <path d="M260,5 L270,9 L260,13"/> <path d="M280,5 L290,9 L280,13"/>
+      <path d="M300,5 L310,9 L300,13"/> <path d="M320,5 L330,9 L320,13"/>
+      <path d="M340,5 L350,9 L340,13"/> <path d="M360,5 L370,9 L360,13"/>
+      <path d="M380,5 L390,9 L380,13"/> <path d="M400,5 L410,9 L400,13"/>
+      <path d="M420,5 L430,9 L420,13"/>
+    </g>
+    <circle cx="5" cy="9" r="2" fill="#4a2e1a" opacity="0.4"/>
+    <circle cx="435" cy="9" r="2" fill="#4a2e1a" opacity="0.4"/>
+    <!-- small diamonds -->
+    <path d="M218,5 L222,9 L218,13 L214,9Z" fill="#4a2e1a" opacity="0.45"/>
+  </svg>
+  <svg class="hdiv-bot" height="18" viewBox="0 0 440 18" preserveAspectRatio="xMidYMid meet" fill="none" xmlns="http://www.w3.org/2000/svg" opacity="0.5">
+    <line x1="0" y1="9" x2="440" y2="9" stroke="#4a2e1a" stroke-width="0.5" opacity="0.4"/>
+    <g fill="none" stroke="#4a2e1a" stroke-width="0.8" opacity="0.55">
+      <path d="M20,5 L30,9 L20,13"/> <path d="M40,5 L50,9 L40,13"/>
+      <path d="M60,5 L70,9 L60,13"/> <path d="M80,5 L90,9 L80,13"/>
+      <path d="M100,5 L110,9 L100,13"/> <path d="M120,5 L130,9 L120,13"/>
+      <path d="M140,5 L150,9 L140,13"/> <path d="M160,5 L170,9 L160,13"/>
+      <path d="M180,5 L190,9 L180,13"/> <path d="M200,5 L210,9 L200,13"/>
+      <path d="M220,5 L230,9 L220,13"/> <path d="M240,5 L250,9 L240,13"/>
+      <path d="M260,5 L270,9 L260,13"/> <path d="M280,5 L290,9 L280,13"/>
+      <path d="M300,5 L310,9 L300,13"/> <path d="M320,5 L330,9 L320,13"/>
+      <path d="M340,5 L350,9 L340,13"/> <path d="M360,5 L370,9 L360,13"/>
+      <path d="M380,5 L390,9 L380,13"/> <path d="M400,5 L410,9 L400,13"/>
+    </g>
+    <path d="M218,5 L222,9 L218,13 L214,9Z" fill="#4a2e1a" opacity="0.45"/>
+  </svg>
+
+  <!-- CONTENT -->
+  <div class="card-inner" style="padding-top:180px; padding-bottom:140px;">
+    <div class="arabic-verse">وَخَلَقْنَٰكُمْ أَزْوَٰجًا</div>
+    <div class="arabic-mono">اع</div>
+    <div class="couple-names">Asif <span class="amp">&amp;</span> Aminu</div>
+    <div class="ornament-divider">✦</div>
+    <div class="date-line">29 June 2026</div>
+    <div class="subtitle">14 Muharram, 1448 AH</div>
+  </div>
+</div>
+</div>
+
+<!-- ════════════════════════════════
+     PAGE 2 — DETAILS
+════════════════════════════════ -->
+<div class="page" id="page1">
+<div class="card">
+  <div class="border-frame"></div>
+  <!-- reuse corner/vine SVGs via CSS clone -->
+  <svg class="corner-floral corner-tl" width="190" height="200" viewBox="0 0 190 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <!-- cherry blossom branch -->
+    <line x1="30" y1="200" x2="80" y2="80" stroke="#4a2e1a" stroke-width="1.5" opacity="0.5"/>
+    <line x1="80" y1="80" x2="110" y2="30" stroke="#4a2e1a" stroke-width="1.2" opacity="0.5"/>
+    <line x1="80" y1="80" x2="140" y2="60" stroke="#4a2e1a" stroke-width="1" opacity="0.45"/>
+    <line x1="80" y1="80" x2="60" y2="40" stroke="#4a2e1a" stroke-width="1" opacity="0.4"/>
+    <line x1="60" y1="140" x2="40" y2="110" stroke="#4a2e1a" stroke-width="0.8" opacity="0.35"/>
+    <line x1="60" y1="140" x2="90" y2="120" stroke="#4a2e1a" stroke-width="0.8" opacity="0.35"/>
+    <!-- small blossoms -->
+    <g transform="translate(108,28)" opacity="0.7">
+      <ellipse cx="0" cy="-8" rx="5" ry="8" fill="none" stroke="#4a2e1a" stroke-width="1" transform="rotate(0)"/>
+      <ellipse cx="0" cy="-8" rx="5" ry="8" fill="none" stroke="#4a2e1a" stroke-width="1" transform="rotate(72)"/>
+      <ellipse cx="0" cy="-8" rx="5" ry="8" fill="none" stroke="#4a2e1a" stroke-width="1" transform="rotate(144)"/>
+      <ellipse cx="0" cy="-8" rx="5" ry="8" fill="none" stroke="#4a2e1a" stroke-width="1" transform="rotate(216)"/>
+      <ellipse cx="0" cy="-8" rx="5" ry="8" fill="none" stroke="#4a2e1a" stroke-width="1" transform="rotate(288)"/>
+      <circle cx="0" cy="0" r="2.5" fill="none" stroke="#4a2e1a" stroke-width="0.8"/>
+    </g>
+    <g transform="translate(58,38)" opacity="0.65">
+      <ellipse cx="0" cy="-7" rx="4.5" ry="7" fill="none" stroke="#4a2e1a" stroke-width="1" transform="rotate(0)"/>
+      <ellipse cx="0" cy="-7" rx="4.5" ry="7" fill="none" stroke="#4a2e1a" stroke-width="1" transform="rotate(72)"/>
+      <ellipse cx="0" cy="-7" rx="4.5" ry="7" fill="none" stroke="#4a2e1a" stroke-width="1" transform="rotate(144)"/>
+      <ellipse cx="0" cy="-7" rx="4.5" ry="7" fill="none" stroke="#4a2e1a" stroke-width="1" transform="rotate(216)"/>
+      <ellipse cx="0" cy="-7" rx="4.5" ry="7" fill="none" stroke="#4a2e1a" stroke-width="1" transform="rotate(288)"/>
+      <circle cx="0" cy="0" r="2" fill="none" stroke="#4a2e1a" stroke-width="0.8"/>
+    </g>
+    <g transform="translate(138,60)" opacity="0.6">
+      <ellipse cx="0" cy="-6" rx="4" ry="6" fill="none" stroke="#4a2e1a" stroke-width="0.9" transform="rotate(0)"/>
+      <ellipse cx="0" cy="-6" rx="4" ry="6" fill="none" stroke="#4a2e1a" stroke-width="0.9" transform="rotate(72)"/>
+      <ellipse cx="0" cy="-6" rx="4" ry="6" fill="none" stroke="#4a2e1a" stroke-width="0.9" transform="rotate(144)"/>
+      <ellipse cx="0" cy="-6" rx="4" ry="6" fill="none" stroke="#4a2e1a" stroke-width="0.9" transform="rotate(216)"/>
+      <ellipse cx="0" cy="-6" rx="4" ry="6" fill="none" stroke="#4a2e1a" stroke-width="0.9" transform="rotate(288)"/>
+    </g>
+    <!-- berries -->
+    <circle cx="170" cy="55" r="5" fill="none" stroke="#4a2e1a" stroke-width="1" opacity="0.55"/>
+    <circle cx="158" cy="48" r="4" fill="none" stroke="#4a2e1a" stroke-width="1" opacity="0.5"/>
+    <circle cx="176" cy="45" r="3.5" fill="none" stroke="#4a2e1a" stroke-width="0.9" opacity="0.45"/>
+    <circle cx="162" cy="40" r="3" fill="none" stroke="#4a2e1a" stroke-width="0.9" opacity="0.4"/>
+    <line x1="160" y1="32" x2="168" y2="52" stroke="#4a2e1a" stroke-width="0.8" opacity="0.4"/>
+    <line x1="168" y1="32" x2="162" y2="50" stroke="#4a2e1a" stroke-width="0.8" opacity="0.35"/>
+  </svg>
+  <svg class="corner-floral corner-tr" width="170" height="190" viewBox="0 0 170 190" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <g transform="translate(72,80)" opacity="0.65">
+      <ellipse cx="0" cy="-42" rx="24" ry="42" fill="none" stroke="#4a2e1a" stroke-width="1.4" transform="rotate(0)"/>
+      <ellipse cx="0" cy="-42" rx="24" ry="42" fill="none" stroke="#4a2e1a" stroke-width="1.4" transform="rotate(72)"/>
+      <ellipse cx="0" cy="-42" rx="24" ry="42" fill="none" stroke="#4a2e1a" stroke-width="1.4" transform="rotate(144)"/>
+      <ellipse cx="0" cy="-42" rx="24" ry="42" fill="none" stroke="#4a2e1a" stroke-width="1.4" transform="rotate(216)"/>
+      <ellipse cx="0" cy="-42" rx="24" ry="42" fill="none" stroke="#4a2e1a" stroke-width="1.4" transform="rotate(288)"/>
+      <!-- veins -->
+      <line x1="0" y1="-10" x2="4" y2="-44" stroke="#4a2e1a" stroke-width="0.6" opacity="0.4" transform="rotate(0)"/>
+      <line x1="0" y1="-10" x2="4" y2="-44" stroke="#4a2e1a" stroke-width="0.6" opacity="0.4" transform="rotate(72)"/>
+      <line x1="0" y1="-10" x2="4" y2="-44" stroke="#4a2e1a" stroke-width="0.6" opacity="0.4" transform="rotate(144)"/>
+      <line x1="0" y1="-10" x2="4" y2="-44" stroke="#4a2e1a" stroke-width="0.6" opacity="0.4" transform="rotate(216)"/>
+      <line x1="0" y1="-10" x2="4" y2="-44" stroke="#4a2e1a" stroke-width="0.6" opacity="0.4" transform="rotate(288)"/>
+      <circle cx="0" cy="0" r="11" fill="none" stroke="#4a2e1a" stroke-width="1.3"/>
+      <circle cx="0" cy="0" r="5" fill="none" stroke="#4a2e1a" stroke-width="0.8"/>
+    </g>
+    <!-- stem -->
+    <path d="M72,100 Q55,130 30,190" stroke="#4a2e1a" stroke-width="1.2" opacity="0.4" fill="none"/>
+    <!-- berries -->
+    <circle cx="130" cy="20" r="5" fill="none" stroke="#4a2e1a" stroke-width="1" opacity="0.45"/>
+    <circle cx="143" cy="14" r="4" fill="none" stroke="#4a2e1a" stroke-width="0.9" opacity="0.4"/>
+    <circle cx="120" cy="12" r="3.5" fill="none" stroke="#4a2e1a" stroke-width="0.9" opacity="0.38"/>
+    <line x1="120" y1="5" x2="132" y2="22" stroke="#4a2e1a" stroke-width="0.8" opacity="0.35"/>
+  </svg>
+  <svg class="corner-floral corner-bl" width="170" height="190" viewBox="0 0 170 190" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <g transform="translate(72,80)" opacity="0.65">
+      <ellipse cx="0" cy="-42" rx="24" ry="42" fill="none" stroke="#4a2e1a" stroke-width="1.4" transform="rotate(0)"/>
+      <ellipse cx="0" cy="-42" rx="24" ry="42" fill="none" stroke="#4a2e1a" stroke-width="1.4" transform="rotate(72)"/>
+      <ellipse cx="0" cy="-42" rx="24" ry="42" fill="none" stroke="#4a2e1a" stroke-width="1.4" transform="rotate(144)"/>
+      <ellipse cx="0" cy="-42" rx="24" ry="42" fill="none" stroke="#4a2e1a" stroke-width="1.4" transform="rotate(216)"/>
+      <ellipse cx="0" cy="-42" rx="24" ry="42" fill="none" stroke="#4a2e1a" stroke-width="1.4" transform="rotate(288)"/>
+      <!-- veins -->
+      <line x1="0" y1="-10" x2="4" y2="-44" stroke="#4a2e1a" stroke-width="0.6" opacity="0.4" transform="rotate(0)"/>
+      <line x1="0" y1="-10" x2="4" y2="-44" stroke="#4a2e1a" stroke-width="0.6" opacity="0.4" transform="rotate(72)"/>
+      <line x1="0" y1="-10" x2="4" y2="-44" stroke="#4a2e1a" stroke-width="0.6" opacity="0.4" transform="rotate(144)"/>
+      <line x1="0" y1="-10" x2="4" y2="-44" stroke="#4a2e1a" stroke-width="0.6" opacity="0.4" transform="rotate(216)"/>
+      <line x1="0" y1="-10" x2="4" y2="-44" stroke="#4a2e1a" stroke-width="0.6" opacity="0.4" transform="rotate(288)"/>
+      <circle cx="0" cy="0" r="11" fill="none" stroke="#4a2e1a" stroke-width="1.3"/>
+      <circle cx="0" cy="0" r="5" fill="none" stroke="#4a2e1a" stroke-width="0.8"/>
+    </g>
+    <!-- stem -->
+    <path d="M72,100 Q55,130 30,190" stroke="#4a2e1a" stroke-width="1.2" opacity="0.4" fill="none"/>
+    <!-- berries bottom left -->
+    <circle cx="130" cy="20" r="5" fill="none" stroke="#4a2e1a" stroke-width="1" opacity="0.45"/>
+    <circle cx="143" cy="14" r="4" fill="none" stroke="#4a2e1a" stroke-width="0.9" opacity="0.4"/>
+    <circle cx="120" cy="12" r="3.5" fill="none" stroke="#4a2e1a" stroke-width="0.9" opacity="0.38"/>
+    <line x1="120" y1="5" x2="132" y2="22" stroke="#4a2e1a" stroke-width="0.8" opacity="0.35"/>
+  </svg>
+  <svg class="corner-floral corner-br" width="155" height="175" viewBox="0 0 155 175" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <!-- wildflower bunch -->
+    <line x1="60" y1="175" x2="70" y2="100" stroke="#4a2e1a" stroke-width="1.2" opacity="0.45"/>
+    <line x1="70" y1="100" x2="90" y2="50" stroke="#4a2e1a" stroke-width="1.1" opacity="0.45"/>
+    <line x1="70" y1="100" x2="110" y2="70" stroke="#4a2e1a" stroke-width="1" opacity="0.4"/>
+    <line x1="70" y1="100" x2="45" y2="65" stroke="#4a2e1a" stroke-width="1" opacity="0.4"/>
+    <line x1="80" y1="140" x2="100" y2="120" stroke="#4a2e1a" stroke-width="0.8" opacity="0.35"/>
+    <!-- flower 1 -->
+    <g transform="translate(89,48)" opacity="0.6">
+      <ellipse cx="0" cy="-10" rx="6" ry="11" fill="none" stroke="#4a2e1a" stroke-width="1" transform="rotate(0)"/>
+      <ellipse cx="0" cy="-10" rx="6" ry="11" fill="none" stroke="#4a2e1a" stroke-width="1" transform="rotate(60)"/>
+      <ellipse cx="0" cy="-10" rx="6" ry="11" fill="none" stroke="#4a2e1a" stroke-width="1" transform="rotate(120)"/>
+      <ellipse cx="0" cy="-10" rx="6" ry="11" fill="none" stroke="#4a2e1a" stroke-width="1" transform="rotate(180)"/>
+      <ellipse cx="0" cy="-10" rx="6" ry="11" fill="none" stroke="#4a2e1a" stroke-width="1" transform="rotate(240)"/>
+      <ellipse cx="0" cy="-10" rx="6" ry="11" fill="none" stroke="#4a2e1a" stroke-width="1" transform="rotate(300)"/>
+      <circle cx="0" cy="0" r="4" fill="none" stroke="#4a2e1a" stroke-width="0.9"/>
+    </g>
+    <!-- flower 2 -->
+    <g transform="translate(110,68)" opacity="0.55">
+      <ellipse cx="0" cy="-9" rx="5.5" ry="10" fill="none" stroke="#4a2e1a" stroke-width="1" transform="rotate(0)"/>
+      <ellipse cx="0" cy="-9" rx="5.5" ry="10" fill="none" stroke="#4a2e1a" stroke-width="1" transform="rotate(60)"/>
+      <ellipse cx="0" cy="-9" rx="5.5" ry="10" fill="none" stroke="#4a2e1a" stroke-width="1" transform="rotate(120)"/>
+      <ellipse cx="0" cy="-9" rx="5.5" ry="10" fill="none" stroke="#4a2e1a" stroke-width="1" transform="rotate(180)"/>
+      <ellipse cx="0" cy="-9" rx="5.5" ry="10" fill="none" stroke="#4a2e1a" stroke-width="1" transform="rotate(240)"/>
+      <ellipse cx="0" cy="-9" rx="5.5" ry="10" fill="none" stroke="#4a2e1a" stroke-width="1" transform="rotate(300)"/>
+      <circle cx="0" cy="0" r="3.5" fill="none" stroke="#4a2e1a" stroke-width="0.8"/>
+    </g>
+    <!-- buds -->
+    <g transform="translate(45,62)">
+      <ellipse cx="0" cy="-8" rx="4" ry="8" fill="none" stroke="#4a2e1a" stroke-width="1" opacity="0.5"/>
+      <line x1="-3" y1="-5" x2="-8" y2="-2" stroke="#4a2e1a" stroke-width="0.7" opacity="0.4"/>
+      <line x1="-3" y1="-5" x2="-9" y2="-8" stroke="#4a2e1a" stroke-width="0.7" opacity="0.4"/>
+    </g>
+  </svg>
+
+  <svg class="vine-left" viewBox="0 0 38 900" preserveAspectRatio="xMidYMid meet" fill="none" xmlns="http://www.w3.org/2000/svg" opacity="0.45">
+    <line x1="19" y1="130" x2="19" y2="870" stroke="#4a2e1a" stroke-width="0.6" opacity="0.3" stroke-dasharray="2,8"/>
+    <path d="M14,160 L19,150 L24,160" fill="none" stroke="#4a2e1a" stroke-width="0.9" opacity="0.5"/>
+    <path d="M12,185 L19,175 L26,185" fill="none" stroke="#4a2e1a" stroke-width="0.9" opacity="0.45"/>
+    <path d="M14,215 L19,205 L24,215" fill="none" stroke="#4a2e1a" stroke-width="0.9" opacity="0.5"/>
+    <path d="M12,245 L19,235 L26,245" fill="none" stroke="#4a2e1a" stroke-width="0.9" opacity="0.45"/>
+    <path d="M14,278 L19,268 L24,278" fill="none" stroke="#4a2e1a" stroke-width="0.9" opacity="0.5"/>
+    <path d="M12,310 L19,300 L26,310" fill="none" stroke="#4a2e1a" stroke-width="0.9" opacity="0.45"/>
+    <path d="M14,342 L19,332 L24,342" fill="none" stroke="#4a2e1a" stroke-width="0.9" opacity="0.5"/>
+    <path d="M12,374 L19,364 L26,374" fill="none" stroke="#4a2e1a" stroke-width="0.9" opacity="0.45"/>
+    <path d="M14,406 L19,396 L24,406" fill="none" stroke="#4a2e1a" stroke-width="0.9" opacity="0.5"/>
+    <path d="M12,438 L19,428 L26,438" fill="none" stroke="#4a2e1a" stroke-width="0.9" opacity="0.45"/>
+    <path d="M14,470 L19,460 L24,470" fill="none" stroke="#4a2e1a" stroke-width="0.9" opacity="0.5"/>
+    <path d="M12,502 L19,492 L26,502" fill="none" stroke="#4a2e1a" stroke-width="0.9" opacity="0.45"/>
+    <path d="M14,534 L19,524 L24,534" fill="none" stroke="#4a2e1a" stroke-width="0.9" opacity="0.5"/>
+    <path d="M12,566 L19,556 L26,566" fill="none" stroke="#4a2e1a" stroke-width="0.9" opacity="0.45"/>
+    <path d="M14,598 L19,588 L24,598" fill="none" stroke="#4a2e1a" stroke-width="0.9" opacity="0.5"/>
+    <path d="M12,630 L19,620 L26,630" fill="none" stroke="#4a2e1a" stroke-width="0.9" opacity="0.45"/>
+    <path d="M14,662 L19,652 L24,662" fill="none" stroke="#4a2e1a" stroke-width="0.9" opacity="0.5"/>
+    <path d="M12,694 L19,684 L26,694" fill="none" stroke="#4a2e1a" stroke-width="0.9" opacity="0.45"/>
+    <path d="M14,726 L19,716 L24,726" fill="none" stroke="#4a2e1a" stroke-width="0.9" opacity="0.5"/>
+    <path d="M12,758 L19,748 L26,758" fill="none" stroke="#4a2e1a" stroke-width="0.9" opacity="0.45"/>
+    <circle cx="19" cy="200" r="1.5" fill="#4a2e1a" opacity="0.35"/>
+    <circle cx="19" cy="340" r="1.5" fill="#4a2e1a" opacity="0.35"/>
+    <circle cx="19" cy="480" r="1.5" fill="#4a2e1a" opacity="0.35"/>
+    <circle cx="19" cy="620" r="1.5" fill="#4a2e1a" opacity="0.35"/>
+    <circle cx="19" cy="760" r="1.5" fill="#4a2e1a" opacity="0.35"/>
+  </svg>
+  <svg class="vine-right" viewBox="0 0 38 900" preserveAspectRatio="xMidYMid meet" fill="none" xmlns="http://www.w3.org/2000/svg" opacity="0.45">
+    <line x1="19" y1="130" x2="19" y2="870" stroke="#4a2e1a" stroke-width="0.6" opacity="0.3" stroke-dasharray="2,8"/>
+    <path d="M14,160 L19,150 L24,160" fill="none" stroke="#4a2e1a" stroke-width="0.9" opacity="0.5"/>
+    <path d="M12,185 L19,175 L26,185" fill="none" stroke="#4a2e1a" stroke-width="0.9" opacity="0.45"/>
+    <path d="M14,215 L19,205 L24,215" fill="none" stroke="#4a2e1a" stroke-width="0.9" opacity="0.5"/>
+    <path d="M12,245 L19,235 L26,245" fill="none" stroke="#4a2e1a" stroke-width="0.9" opacity="0.45"/>
+    <path d="M14,278 L19,268 L24,278" fill="none" stroke="#4a2e1a" stroke-width="0.9" opacity="0.5"/>
+    <path d="M12,310 L19,300 L26,310" fill="none" stroke="#4a2e1a" stroke-width="0.9" opacity="0.45"/>
+    <path d="M14,342 L19,332 L24,342" fill="none" stroke="#4a2e1a" stroke-width="0.9" opacity="0.5"/>
+    <path d="M12,374 L19,364 L26,374" fill="none" stroke="#4a2e1a" stroke-width="0.9" opacity="0.45"/>
+    <path d="M14,406 L19,396 L24,406" fill="none" stroke="#4a2e1a" stroke-width="0.9" opacity="0.5"/>
+    <path d="M12,438 L19,428 L26,438" fill="none" stroke="#4a2e1a" stroke-width="0.9" opacity="0.45"/>
+    <path d="M14,470 L19,460 L24,470" fill="none" stroke="#4a2e1a" stroke-width="0.9" opacity="0.5"/>
+    <circle cx="19" cy="200" r="1.5" fill="#4a2e1a" opacity="0.35"/>
+    <circle cx="19" cy="340" r="1.5" fill="#4a2e1a" opacity="0.35"/>
+    <circle cx="19" cy="480" r="1.5" fill="#4a2e1a" opacity="0.35"/>
+    <circle cx="19" cy="620" r="1.5" fill="#4a2e1a" opacity="0.35"/>
+  </svg>
+
+  <svg class="hdiv-top" height="18" viewBox="0 0 440 18" preserveAspectRatio="xMidYMid meet" fill="none" xmlns="http://www.w3.org/2000/svg" opacity="0.5">
+    <g fill="none" stroke="#4a2e1a" stroke-width="0.8" opacity="0.6">
+      <path d="M20,5 L30,9 L20,13"/> <path d="M40,5 L50,9 L40,13"/><path d="M60,5 L70,9 L60,13"/> <path d="M80,5 L90,9 L80,13"/><path d="M100,5 L110,9 L100,13"/> <path d="M120,5 L130,9 L120,13"/><path d="M140,5 L150,9 L140,13"/> <path d="M160,5 L170,9 L160,13"/><path d="M180,5 L190,9 L180,13"/> <path d="M200,5 L210,9 L200,13"/><path d="M220,5 L230,9 L220,13"/> <path d="M240,5 L250,9 L240,13"/><path d="M260,5 L270,9 L260,13"/> <path d="M280,5 L290,9 L280,13"/><path d="M300,5 L310,9 L300,13"/> <path d="M320,5 L330,9 L320,13"/><path d="M340,5 L350,9 L340,13"/> <path d="M360,5 L370,9 L360,13"/><path d="M380,5 L390,9 L380,13"/> <path d="M400,5 L410,9 L400,13"/>
+    </g>
+    <path d="M218,5 L222,9 L218,13 L214,9Z" fill="#4a2e1a" opacity="0.45"/>
+  </svg>
+  <svg class="hdiv-bot" height="18" viewBox="0 0 440 18" preserveAspectRatio="xMidYMid meet" fill="none" xmlns="http://www.w3.org/2000/svg" opacity="0.5">
+    <g fill="none" stroke="#4a2e1a" stroke-width="0.8" opacity="0.55">
+      <path d="M20,5 L30,9 L20,13"/> <path d="M40,5 L50,9 L40,13"/><path d="M60,5 L70,9 L60,13"/> <path d="M80,5 L90,9 L80,13"/><path d="M100,5 L110,9 L100,13"/> <path d="M120,5 L130,9 L120,13"/><path d="M140,5 L150,9 L140,13"/> <path d="M160,5 L170,9 L160,13"/><path d="M180,5 L190,9 L180,13"/> <path d="M200,5 L210,9 L200,13"/><path d="M220,5 L230,9 L220,13"/> <path d="M240,5 L250,9 L240,13"/><path d="M260,5 L270,9 L260,13"/> <path d="M280,5 L290,9 L280,13"/><path d="M300,5 L310,9 L300,13"/> <path d="M320,5 L330,9 L320,13"/><path d="M340,5 L350,9 L340,13"/> <path d="M360,5 L370,9 L360,13"/>
+    </g>
+    <path d="M218,5 L222,9 L218,13 L214,9Z" fill="#4a2e1a" opacity="0.45"/>
+  </svg>
+
+  <div class="card-inner" style="padding-top:155px; padding-bottom:135px;">
+    <div class="arabic-verse" style="font-size:clamp(1rem,3vw,1.3rem); margin-bottom:22px;">اَلسَّلَامُ عَلَيْكُمْ وَرَحْمَةُ اللهِ وَبَرَكَاتُهُ</div>
+
+    <div class="family-names">Mr. Shaji K P<br>&amp;<br>Mrs. Sherina P U</div>
+    <div class="invite-text">cordially invite you to bless the auspicious wedding<br>reception of our beloved son</div>
+
+    <div class="names-large">Asif Muhammed</div>
+    <div class="gs-text">G/s of K M Pareeth (KMP, Muvattupuzha) and N M Nabeesa<br>&amp;<br>P H Ummer and M M Beevi</div>
+
+    <div class="ornament-divider" style="font-size:1.6rem; margin:12px 0;">&amp;</div>
+
+    <div class="names-large">Aminu Shaji</div>
+    <div class="gs-text">D/o Shaji M H and Sabeeja Shaji<br><span style="text-decoration: underline; text-underline-offset: 3px;">Mullasseriyil House, Hidayath Nagar,</span><br><span style="text-decoration: underline; text-underline-offset: 3px;">Changanacherry, Kottayam</span></div>
+
+    <div class="ornament-divider">✦</div>
+
+    <div class="date-line" style="margin-bottom:6px;">29 June 2026</div>
+    <div style="margin-bottom:6px;"></div>
+    <div class="venue-name">Kenz Auditorium</div>
+    <div class="venue-place">Muvattupuzha</div>
+  </div>
+</div>
+</div>
+
+<!-- ════════════════════════════════
+     PAGE 3 — PROGRAMS & LOCATION
+════════════════════════════════ -->
+<div class="page" id="page2">
+<div class="card">
+  <div class="border-frame"></div>
+  <svg class="corner-floral corner-tl" width="190" height="200" viewBox="0 0 190 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <!-- cherry blossom branch -->
+    <line x1="30" y1="200" x2="80" y2="80" stroke="#4a2e1a" stroke-width="1.5" opacity="0.5"/>
+    <line x1="80" y1="80" x2="110" y2="30" stroke="#4a2e1a" stroke-width="1.2" opacity="0.5"/>
+    <line x1="80" y1="80" x2="140" y2="60" stroke="#4a2e1a" stroke-width="1" opacity="0.45"/>
+    <line x1="80" y1="80" x2="60" y2="40" stroke="#4a2e1a" stroke-width="1" opacity="0.4"/>
+    <line x1="60" y1="140" x2="40" y2="110" stroke="#4a2e1a" stroke-width="0.8" opacity="0.35"/>
+    <line x1="60" y1="140" x2="90" y2="120" stroke="#4a2e1a" stroke-width="0.8" opacity="0.35"/>
+    <!-- small blossoms -->
+    <g transform="translate(108,28)" opacity="0.7">
+      <ellipse cx="0" cy="-8" rx="5" ry="8" fill="none" stroke="#4a2e1a" stroke-width="1" transform="rotate(0)"/>
+      <ellipse cx="0" cy="-8" rx="5" ry="8" fill="none" stroke="#4a2e1a" stroke-width="1" transform="rotate(72)"/>
+      <ellipse cx="0" cy="-8" rx="5" ry="8" fill="none" stroke="#4a2e1a" stroke-width="1" transform="rotate(144)"/>
+      <ellipse cx="0" cy="-8" rx="5" ry="8" fill="none" stroke="#4a2e1a" stroke-width="1" transform="rotate(216)"/>
+      <ellipse cx="0" cy="-8" rx="5" ry="8" fill="none" stroke="#4a2e1a" stroke-width="1" transform="rotate(288)"/>
+      <circle cx="0" cy="0" r="2.5" fill="none" stroke="#4a2e1a" stroke-width="0.8"/>
+    </g>
+    <g transform="translate(58,38)" opacity="0.65">
+      <ellipse cx="0" cy="-7" rx="4.5" ry="7" fill="none" stroke="#4a2e1a" stroke-width="1" transform="rotate(0)"/>
+      <ellipse cx="0" cy="-7" rx="4.5" ry="7" fill="none" stroke="#4a2e1a" stroke-width="1" transform="rotate(72)"/>
+      <ellipse cx="0" cy="-7" rx="4.5" ry="7" fill="none" stroke="#4a2e1a" stroke-width="1" transform="rotate(144)"/>
+      <ellipse cx="0" cy="-7" rx="4.5" ry="7" fill="none" stroke="#4a2e1a" stroke-width="1" transform="rotate(216)"/>
+      <ellipse cx="0" cy="-7" rx="4.5" ry="7" fill="none" stroke="#4a2e1a" stroke-width="1" transform="rotate(288)"/>
+      <circle cx="0" cy="0" r="2" fill="none" stroke="#4a2e1a" stroke-width="0.8"/>
+    </g>
+    <g transform="translate(138,60)" opacity="0.6">
+      <ellipse cx="0" cy="-6" rx="4" ry="6" fill="none" stroke="#4a2e1a" stroke-width="0.9" transform="rotate(0)"/>
+      <ellipse cx="0" cy="-6" rx="4" ry="6" fill="none" stroke="#4a2e1a" stroke-width="0.9" transform="rotate(72)"/>
+      <ellipse cx="0" cy="-6" rx="4" ry="6" fill="none" stroke="#4a2e1a" stroke-width="0.9" transform="rotate(144)"/>
+      <ellipse cx="0" cy="-6" rx="4" ry="6" fill="none" stroke="#4a2e1a" stroke-width="0.9" transform="rotate(216)"/>
+      <ellipse cx="0" cy="-6" rx="4" ry="6" fill="none" stroke="#4a2e1a" stroke-width="0.9" transform="rotate(288)"/>
+    </g>
+    <!-- berries -->
+    <circle cx="170" cy="55" r="5" fill="none" stroke="#4a2e1a" stroke-width="1" opacity="0.55"/>
+    <circle cx="158" cy="48" r="4" fill="none" stroke="#4a2e1a" stroke-width="1" opacity="0.5"/>
+    <circle cx="176" cy="45" r="3.5" fill="none" stroke="#4a2e1a" stroke-width="0.9" opacity="0.45"/>
+    <circle cx="162" cy="40" r="3" fill="none" stroke="#4a2e1a" stroke-width="0.9" opacity="0.4"/>
+    <line x1="160" y1="32" x2="168" y2="52" stroke="#4a2e1a" stroke-width="0.8" opacity="0.4"/>
+    <line x1="168" y1="32" x2="162" y2="50" stroke="#4a2e1a" stroke-width="0.8" opacity="0.35"/>
+  </svg>
+  <svg class="corner-floral corner-tr" width="170" height="190" viewBox="0 0 170 190" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <g transform="translate(72,80)" opacity="0.65">
+      <ellipse cx="0" cy="-42" rx="24" ry="42" fill="none" stroke="#4a2e1a" stroke-width="1.4" transform="rotate(0)"/>
+      <ellipse cx="0" cy="-42" rx="24" ry="42" fill="none" stroke="#4a2e1a" stroke-width="1.4" transform="rotate(72)"/>
+      <ellipse cx="0" cy="-42" rx="24" ry="42" fill="none" stroke="#4a2e1a" stroke-width="1.4" transform="rotate(144)"/>
+      <ellipse cx="0" cy="-42" rx="24" ry="42" fill="none" stroke="#4a2e1a" stroke-width="1.4" transform="rotate(216)"/>
+      <ellipse cx="0" cy="-42" rx="24" ry="42" fill="none" stroke="#4a2e1a" stroke-width="1.4" transform="rotate(288)"/>
+      <!-- veins -->
+      <line x1="0" y1="-10" x2="4" y2="-44" stroke="#4a2e1a" stroke-width="0.6" opacity="0.4" transform="rotate(0)"/>
+      <line x1="0" y1="-10" x2="4" y2="-44" stroke="#4a2e1a" stroke-width="0.6" opacity="0.4" transform="rotate(72)"/>
+      <line x1="0" y1="-10" x2="4" y2="-44" stroke="#4a2e1a" stroke-width="0.6" opacity="0.4" transform="rotate(144)"/>
+      <line x1="0" y1="-10" x2="4" y2="-44" stroke="#4a2e1a" stroke-width="0.6" opacity="0.4" transform="rotate(216)"/>
+      <line x1="0" y1="-10" x2="4" y2="-44" stroke="#4a2e1a" stroke-width="0.6" opacity="0.4" transform="rotate(288)"/>
+      <circle cx="0" cy="0" r="11" fill="none" stroke="#4a2e1a" stroke-width="1.3"/>
+      <circle cx="0" cy="0" r="5" fill="none" stroke="#4a2e1a" stroke-width="0.8"/>
+    </g>
+    <!-- stem -->
+    <path d="M72,100 Q55,130 30,190" stroke="#4a2e1a" stroke-width="1.2" opacity="0.4" fill="none"/>
+    <!-- berries -->
+    <circle cx="130" cy="20" r="5" fill="none" stroke="#4a2e1a" stroke-width="1" opacity="0.45"/>
+    <circle cx="143" cy="14" r="4" fill="none" stroke="#4a2e1a" stroke-width="0.9" opacity="0.4"/>
+    <circle cx="120" cy="12" r="3.5" fill="none" stroke="#4a2e1a" stroke-width="0.9" opacity="0.38"/>
+    <line x1="120" y1="5" x2="132" y2="22" stroke="#4a2e1a" stroke-width="0.8" opacity="0.35"/>
+  </svg>
+  <svg class="corner-floral corner-bl" width="170" height="190" viewBox="0 0 170 190" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <g transform="translate(72,80)" opacity="0.65">
+      <ellipse cx="0" cy="-42" rx="24" ry="42" fill="none" stroke="#4a2e1a" stroke-width="1.4" transform="rotate(0)"/>
+      <ellipse cx="0" cy="-42" rx="24" ry="42" fill="none" stroke="#4a2e1a" stroke-width="1.4" transform="rotate(72)"/>
+      <ellipse cx="0" cy="-42" rx="24" ry="42" fill="none" stroke="#4a2e1a" stroke-width="1.4" transform="rotate(144)"/>
+      <ellipse cx="0" cy="-42" rx="24" ry="42" fill="none" stroke="#4a2e1a" stroke-width="1.4" transform="rotate(216)"/>
+      <ellipse cx="0" cy="-42" rx="24" ry="42" fill="none" stroke="#4a2e1a" stroke-width="1.4" transform="rotate(288)"/>
+      <!-- veins -->
+      <line x1="0" y1="-10" x2="4" y2="-44" stroke="#4a2e1a" stroke-width="0.6" opacity="0.4" transform="rotate(0)"/>
+      <line x1="0" y1="-10" x2="4" y2="-44" stroke="#4a2e1a" stroke-width="0.6" opacity="0.4" transform="rotate(72)"/>
+      <line x1="0" y1="-10" x2="4" y2="-44" stroke="#4a2e1a" stroke-width="0.6" opacity="0.4" transform="rotate(144)"/>
+      <line x1="0" y1="-10" x2="4" y2="-44" stroke="#4a2e1a" stroke-width="0.6" opacity="0.4" transform="rotate(216)"/>
+      <line x1="0" y1="-10" x2="4" y2="-44" stroke="#4a2e1a" stroke-width="0.6" opacity="0.4" transform="rotate(288)"/>
+      <circle cx="0" cy="0" r="11" fill="none" stroke="#4a2e1a" stroke-width="1.3"/>
+      <circle cx="0" cy="0" r="5" fill="none" stroke="#4a2e1a" stroke-width="0.8"/>
+    </g>
+    <!-- stem -->
+    <path d="M72,100 Q55,130 30,190" stroke="#4a2e1a" stroke-width="1.2" opacity="0.4" fill="none"/>
+    <!-- berries bottom left -->
+    <circle cx="130" cy="20" r="5" fill="none" stroke="#4a2e1a" stroke-width="1" opacity="0.45"/>
+    <circle cx="143" cy="14" r="4" fill="none" stroke="#4a2e1a" stroke-width="0.9" opacity="0.4"/>
+    <circle cx="120" cy="12" r="3.5" fill="none" stroke="#4a2e1a" stroke-width="0.9" opacity="0.38"/>
+    <line x1="120" y1="5" x2="132" y2="22" stroke="#4a2e1a" stroke-width="0.8" opacity="0.35"/>
+  </svg>
+  <svg class="corner-floral corner-br" width="155" height="175" viewBox="0 0 155 175" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <!-- wildflower bunch -->
+    <line x1="60" y1="175" x2="70" y2="100" stroke="#4a2e1a" stroke-width="1.2" opacity="0.45"/>
+    <line x1="70" y1="100" x2="90" y2="50" stroke="#4a2e1a" stroke-width="1.1" opacity="0.45"/>
+    <line x1="70" y1="100" x2="110" y2="70" stroke="#4a2e1a" stroke-width="1" opacity="0.4"/>
+    <line x1="70" y1="100" x2="45" y2="65" stroke="#4a2e1a" stroke-width="1" opacity="0.4"/>
+    <line x1="80" y1="140" x2="100" y2="120" stroke="#4a2e1a" stroke-width="0.8" opacity="0.35"/>
+    <!-- flower 1 -->
+    <g transform="translate(89,48)" opacity="0.6">
+      <ellipse cx="0" cy="-10" rx="6" ry="11" fill="none" stroke="#4a2e1a" stroke-width="1" transform="rotate(0)"/>
+      <ellipse cx="0" cy="-10" rx="6" ry="11" fill="none" stroke="#4a2e1a" stroke-width="1" transform="rotate(60)"/>
+      <ellipse cx="0" cy="-10" rx="6" ry="11" fill="none" stroke="#4a2e1a" stroke-width="1" transform="rotate(120)"/>
+      <ellipse cx="0" cy="-10" rx="6" ry="11" fill="none" stroke="#4a2e1a" stroke-width="1" transform="rotate(180)"/>
+      <ellipse cx="0" cy="-10" rx="6" ry="11" fill="none" stroke="#4a2e1a" stroke-width="1" transform="rotate(240)"/>
+      <ellipse cx="0" cy="-10" rx="6" ry="11" fill="none" stroke="#4a2e1a" stroke-width="1" transform="rotate(300)"/>
+      <circle cx="0" cy="0" r="4" fill="none" stroke="#4a2e1a" stroke-width="0.9"/>
+    </g>
+    <!-- flower 2 -->
+    <g transform="translate(110,68)" opacity="0.55">
+      <ellipse cx="0" cy="-9" rx="5.5" ry="10" fill="none" stroke="#4a2e1a" stroke-width="1" transform="rotate(0)"/>
+      <ellipse cx="0" cy="-9" rx="5.5" ry="10" fill="none" stroke="#4a2e1a" stroke-width="1" transform="rotate(60)"/>
+      <ellipse cx="0" cy="-9" rx="5.5" ry="10" fill="none" stroke="#4a2e1a" stroke-width="1" transform="rotate(120)"/>
+      <ellipse cx="0" cy="-9" rx="5.5" ry="10" fill="none" stroke="#4a2e1a" stroke-width="1" transform="rotate(180)"/>
+      <ellipse cx="0" cy="-9" rx="5.5" ry="10" fill="none" stroke="#4a2e1a" stroke-width="1" transform="rotate(240)"/>
+      <ellipse cx="0" cy="-9" rx="5.5" ry="10" fill="none" stroke="#4a2e1a" stroke-width="1" transform="rotate(300)"/>
+      <circle cx="0" cy="0" r="3.5" fill="none" stroke="#4a2e1a" stroke-width="0.8"/>
+    </g>
+    <!-- buds -->
+    <g transform="translate(45,62)">
+      <ellipse cx="0" cy="-8" rx="4" ry="8" fill="none" stroke="#4a2e1a" stroke-width="1" opacity="0.5"/>
+      <line x1="-3" y1="-5" x2="-8" y2="-2" stroke="#4a2e1a" stroke-width="0.7" opacity="0.4"/>
+      <line x1="-3" y1="-5" x2="-9" y2="-8" stroke="#4a2e1a" stroke-width="0.7" opacity="0.4"/>
+    </g>
+  </svg>
+  <svg class="vine-left" viewBox="0 0 38 900" preserveAspectRatio="xMidYMid meet" fill="none" xmlns="http://www.w3.org/2000/svg" opacity="0.45">
+    <line x1="19" y1="130" x2="19" y2="870" stroke="#4a2e1a" stroke-width="0.6" opacity="0.3" stroke-dasharray="2,8"/>
+    <path d="M14,160 L19,150 L24,160" fill="none" stroke="#4a2e1a" stroke-width="0.9" opacity="0.5"/><path d="M12,185 L19,175 L26,185" fill="none" stroke="#4a2e1a" stroke-width="0.9" opacity="0.45"/><path d="M14,215 L19,205 L24,215" fill="none" stroke="#4a2e1a" stroke-width="0.9" opacity="0.5"/><path d="M12,245 L19,235 L26,245" fill="none" stroke="#4a2e1a" stroke-width="0.9" opacity="0.45"/><path d="M14,278 L19,268 L24,278" fill="none" stroke="#4a2e1a" stroke-width="0.9" opacity="0.5"/><path d="M12,310 L19,300 L26,310" fill="none" stroke="#4a2e1a" stroke-width="0.9" opacity="0.45"/><path d="M14,342 L19,332 L24,342" fill="none" stroke="#4a2e1a" stroke-width="0.9" opacity="0.5"/><path d="M12,374 L19,364 L26,374" fill="none" stroke="#4a2e1a" stroke-width="0.9" opacity="0.45"/><path d="M14,406 L19,396 L24,406" fill="none" stroke="#4a2e1a" stroke-width="0.9" opacity="0.5"/><path d="M12,438 L19,428 L26,438" fill="none" stroke="#4a2e1a" stroke-width="0.9" opacity="0.45"/><path d="M14,470 L19,460 L24,470" fill="none" stroke="#4a2e1a" stroke-width="0.9" opacity="0.5"/><path d="M12,502 L19,492 L26,502" fill="none" stroke="#4a2e1a" stroke-width="0.9" opacity="0.45"/><path d="M14,534 L19,524 L24,534" fill="none" stroke="#4a2e1a" stroke-width="0.9" opacity="0.5"/><path d="M12,566 L19,556 L26,566" fill="none" stroke="#4a2e1a" stroke-width="0.9" opacity="0.45"/>
+    <circle cx="19" cy="200" r="1.5" fill="#4a2e1a" opacity="0.35"/><circle cx="19" cy="340" r="1.5" fill="#4a2e1a" opacity="0.35"/><circle cx="19" cy="480" r="1.5" fill="#4a2e1a" opacity="0.35"/>
+  </svg>
+  <svg class="vine-right" viewBox="0 0 38 900" preserveAspectRatio="xMidYMid meet" fill="none" xmlns="http://www.w3.org/2000/svg" opacity="0.45">
+    <line x1="19" y1="130" x2="19" y2="870" stroke="#4a2e1a" stroke-width="0.6" opacity="0.3" stroke-dasharray="2,8"/>
+    <path d="M14,160 L19,150 L24,160" fill="none" stroke="#4a2e1a" stroke-width="0.9" opacity="0.5"/><path d="M12,185 L19,175 L26,185" fill="none" stroke="#4a2e1a" stroke-width="0.9" opacity="0.45"/><path d="M14,215 L19,205 L24,215" fill="none" stroke="#4a2e1a" stroke-width="0.9" opacity="0.5"/><path d="M12,245 L19,235 L26,245" fill="none" stroke="#4a2e1a" stroke-width="0.9" opacity="0.45"/><path d="M14,278 L19,268 L24,278" fill="none" stroke="#4a2e1a" stroke-width="0.9" opacity="0.5"/><path d="M12,310 L19,300 L26,310" fill="none" stroke="#4a2e1a" stroke-width="0.9" opacity="0.45"/><path d="M14,342 L19,332 L24,342" fill="none" stroke="#4a2e1a" stroke-width="0.9" opacity="0.5"/><path d="M12,374 L19,364 L26,374" fill="none" stroke="#4a2e1a" stroke-width="0.9" opacity="0.45"/>
+    <circle cx="19" cy="200" r="1.5" fill="#4a2e1a" opacity="0.35"/><circle cx="19" cy="340" r="1.5" fill="#4a2e1a" opacity="0.35"/>
+  </svg>
+
+  <svg class="hdiv-top" height="18" viewBox="0 0 440 18" preserveAspectRatio="xMidYMid meet" fill="none" xmlns="http://www.w3.org/2000/svg" opacity="0.5">
+    <g fill="none" stroke="#4a2e1a" stroke-width="0.8" opacity="0.6">
+      <path d="M20,5 L30,9 L20,13"/> <path d="M40,5 L50,9 L40,13"/><path d="M60,5 L70,9 L60,13"/> <path d="M80,5 L90,9 L80,13"/><path d="M100,5 L110,9 L100,13"/> <path d="M120,5 L130,9 L120,13"/><path d="M140,5 L150,9 L140,13"/> <path d="M160,5 L170,9 L160,13"/><path d="M180,5 L190,9 L180,13"/> <path d="M200,5 L210,9 L200,13"/><path d="M220,5 L230,9 L220,13"/> <path d="M240,5 L250,9 L240,13"/><path d="M260,5 L270,9 L260,13"/> <path d="M280,5 L290,9 L280,13"/><path d="M300,5 L310,9 L300,13"/> <path d="M320,5 L330,9 L320,13"/>
+    </g>
+    <path d="M218,5 L222,9 L218,13 L214,9Z" fill="#4a2e1a" opacity="0.45"/>
+  </svg>
+  <svg class="hdiv-bot" height="18" viewBox="0 0 440 18" preserveAspectRatio="xMidYMid meet" fill="none" xmlns="http://www.w3.org/2000/svg" opacity="0.5">
+    <g fill="none" stroke="#4a2e1a" stroke-width="0.8" opacity="0.55">
+      <path d="M20,5 L30,9 L20,13"/><path d="M40,5 L50,9 L40,13"/><path d="M60,5 L70,9 L60,13"/><path d="M80,5 L90,9 L80,13"/><path d="M100,5 L110,9 L100,13"/><path d="M120,5 L130,9 L120,13"/><path d="M140,5 L150,9 L140,13"/><path d="M160,5 L170,9 L160,13"/><path d="M180,5 L190,9 L180,13"/><path d="M200,5 L210,9 L200,13"/>
+    </g>
+    <path d="M218,5 L222,9 L218,13 L214,9Z" fill="#4a2e1a" opacity="0.45"/>
+  </svg>
+
+  <div class="card-inner" style="padding-top:165px; padding-bottom:140px;">
+    <div class="programs-title">Other Programs</div>
+    <div class="program-item">11.00 - Drinks</div>
+    <div class="program-item" style="margin-bottom:28px;">1.00 - food</div>
+
+    <div class="ornament-divider">✦</div>
+
+    <div class="closing-text">
+      As we begin a beautiful new chapter together, we warmly<br>
+      invite you to join us in celebrating our wedding day.<br>
+      Your presence, blessings, and love would mean the world to us.<br>
+      Kindly follow the map below and be part of our special<br>
+      moment as we create memories to cherish forever.
+    </div>
+
+    <a class="location-btn" href="https://maps.google.com/?q=Kenz+Auditorium+Muvattupuzha" target="_blank">LOCATION</a>
+
+    <div class="countdown-wrap">
+      <div class="countdown-label">See you in</div>
+      <div class="countdown" id="countdown">
+        <div class="c-block"><span class="c-num" id="cd-days">--</span><span class="c-lbl">Days</span></div>
+        <div class="c-sep">:</div>
+        <div class="c-block"><span class="c-num" id="cd-hours">--</span><span class="c-lbl">Hours</span></div>
+        <div class="c-sep">:</div>
+        <div class="c-block"><span class="c-num" id="cd-mins">--</span><span class="c-lbl">Minutes</span></div>
+        <div class="c-sep">:</div>
+        <div class="c-block"><span class="c-num red" id="cd-secs">--</span><span class="c-lbl">Seconds</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<script>
+// ─── PAGE NAVIGATION ───
+let current = 0;
+const pages = document.querySelectorAll('.page');
+const dots = document.querySelectorAll('.nav-dot');
+
+function goPage(n) {
+  pages[current].classList.remove('active');
+  dots[current].classList.remove('active');
+  current = n;
+  pages[current].classList.add('active');
+  dots[current].classList.add('active');
+  window.scrollTo(0,0);
+  if (n === pages.length - 1) {
+    document.getElementById('swipeHint').style.display = 'none';
+  } else {
+    document.getElementById('swipeHint').style.display = 'block';
+  }
+}
+
+// Swipe gesture
+let touchStartY = 0;
+document.addEventListener('touchstart', e => { touchStartY = e.touches[0].clientY; }, {passive:true});
+document.addEventListener('touchend', e => {
+  const dy = touchStartY - e.changedTouches[0].clientY;
+  if (Math.abs(dy) > 50) {
+    if (dy > 0 && current < pages.length - 1) goPage(current + 1);
+    else if (dy < 0 && current > 0) goPage(current - 1);
+  }
+}, {passive:true});
+
+// Wheel navigation
+let wheelLock = false;
+document.addEventListener('wheel', e => {
+  if (wheelLock) return;
+  wheelLock = true;
+  setTimeout(() => wheelLock = false, 800);
+  if (e.deltaY > 30 && current < pages.length - 1) goPage(current + 1);
+  else if (e.deltaY < -30 && current > 0) goPage(current - 1);
+}, {passive:true});
+
+// ─── COUNTDOWN ───
+function updateCountdown() {
+  const target = new Date('2026-06-29T11:00:00');
+  const now = new Date();
+  const diff = target - now;
+  if (diff <= 0) {
+    document.getElementById('cd-days').textContent = '00';
+    document.getElementById('cd-hours').textContent = '00';
+    document.getElementById('cd-mins').textContent = '00';
+    document.getElementById('cd-secs').textContent = '00';
+    return;
+  }
+  const d = Math.floor(diff / 86400000);
+  const h = Math.floor((diff % 86400000) / 3600000);
+  const m = Math.floor((diff % 3600000) / 60000);
+  const s = Math.floor((diff % 60000) / 1000);
+  document.getElementById('cd-days').textContent  = String(d).padStart(2,'0');
+  document.getElementById('cd-hours').textContent = String(h).padStart(2,'0');
+  document.getElementById('cd-mins').textContent  = String(m).padStart(2,'0');
+  document.getElementById('cd-secs').textContent  = String(s).padStart(2,'0');
+}
+updateCountdown();
+setInterval(updateCountdown, 1000);
+</script>
+</body>
+</html>
