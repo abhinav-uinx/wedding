@@ -250,7 +250,7 @@ html, body {
   font-weight:600;
   font-size: clamp(1.1rem,3vw,1.3rem);
   color: var(--brown);
-  margin-bottom:14px;
+  margin-bottom: clamp(8px, 2vh, 14px);
 }
 
 .program-item {
@@ -266,7 +266,7 @@ html, body {
   font-size: clamp(0.85rem,2.3vw,0.95rem);
   color: var(--brown-lt);
   line-height:1.85;
-  margin-bottom:28px;
+  margin-bottom: clamp(12px, 3vh, 28px);
   text-align:center;
 }
 
@@ -285,7 +285,7 @@ html, body {
   background:transparent;
   transition:all 0.3s;
   text-decoration:none;
-  margin-bottom:28px;
+  margin-bottom: clamp(12px, 3vh, 28px);
 }
 .location-btn:hover {
   background:rgba(74,46,26,0.1);
@@ -294,7 +294,7 @@ html, body {
 /* ─── COUNTDOWN ─── */
 .countdown-wrap {
   display: inline-block;
-  margin: 0 auto 10px;
+  margin: 0 auto clamp(2px, 1vh, 10px);
   padding: 12px 20px;
 }
 .countdown-label {
@@ -532,9 +532,9 @@ html, body {
   background: #c8a86a;
   z-index: 500;
   display: flex; justify-content: center; align-items: center;
-  transition: transform 1.6s cubic-bezier(0.68, -0.15, 0.265, 1.35), 
-              opacity 1.4s cubic-bezier(0.8, 0, 0.2, 1),
-              filter 1.2s ease-in;
+  transition: transform 1.2s cubic-bezier(0.68, -0.15, 0.265, 1.35), 
+              opacity 1.0s cubic-bezier(0.8, 0, 0.2, 1),
+              filter 0.8s ease-in;
   will-change: transform, opacity, filter;
   transform-origin: center center;
 }
@@ -704,6 +704,119 @@ html, body {
   background: var(--brown);
   transform: scale(1.5);
 }
+/* ─── DECORATIVE ENTER BUTTON ─── */
+.enter-btn-wrap {
+  position: relative;
+  z-index: 502;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  margin-top: 20px;
+  animation: btnAppear 1.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: 0.5s;
+}
+
+@keyframes btnAppear {
+  from { opacity: 0; transform: translateY(28px) scale(0.94); }
+  to   { opacity: 1; transform: translateY(0)    scale(1); }
+}
+
+/* Outer decorative ring */
+.enter-btn-ring {
+  position: absolute; /* so it sits behind the button without taking flow space */
+  width: 160px;
+  height: 160px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: rotateSlow 18s linear infinite;
+  pointer-events: none; /* so clicks pass through to button if it overlaps */
+}
+
+/* new wrapper to hold both stacked on each other */
+.btn-stack {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 160px;
+  height: 160px;
+}
+@keyframes rotateSlow {
+  to { transform: rotate(360deg); }
+}
+
+.enter-btn-ring svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* Inner button */
+.enter-btn {
+  position: relative;
+  z-index: 2;
+  width: auto;
+  height: auto;
+  border-radius: 4px;
+  border: 1.5px solid var(--brown);
+  background: linear-gradient(135deg, rgba(255,250,235,0.95) 0%, rgba(232,213,176,0.85) 100%);
+  box-shadow:
+    0 2px 18px rgba(74,46,26,0.13),
+    0 0 30px rgba(139,94,60,0.15),
+    inset 0 1px 0 rgba(255,255,255,0.6);
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 14px 34px;
+  transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1),
+              box-shadow 0.5s ease,
+              filter 0.5s ease;
+  -webkit-tap-highlight-color: transparent;
+  animation: btnPulse 3.5s ease-in-out infinite alternate;
+}
+
+@keyframes btnPulse {
+  0%   { box-shadow: 0 0 0 6px rgba(74,46,26,0.08), 0 0 22px rgba(139,94,60,0.15), inset 0 0 20px rgba(255,240,200,0.3); }
+  100% { box-shadow: 0 0 0 10px rgba(74,46,26,0.05), 0 0 40px rgba(139,94,60,0.32), inset 0 0 28px rgba(255,240,200,0.5); }
+}
+
+.enter-btn:hover {
+  transform: scale(1.05);
+  filter: brightness(1.06);
+  box-shadow:
+    0 4px 20px rgba(74,46,26,0.15),
+    0 0 50px rgba(139,94,60,0.35),
+    inset 0 1px 0 rgba(255,255,255,0.7);
+}
+
+.enter-btn:active {
+  transform: scale(0.95);
+}
+
+.enter-btn-label {
+  font-family: 'Crimson Text', serif;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--brown);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+.enter-btn-icon {
+  font-size: 0.75rem;
+  color: var(--brown-lt);
+  opacity: 0.65;
+}
+
+
+
+.splash-btn { display: none !important; }
 </style>
 
 </head>
@@ -711,10 +824,43 @@ html, body {
 
 <!-- ─── SPLASH SCREEN / LANDING GATE ─── -->
 <div class="splash-screen" id="splashScreen">
-  <div class="splash-content">
-    
-    <button class="splash-btn" id="enterBtn">Open Invitation</button>
+    <div class="enter-btn-wrap">
+    <!-- Rotating decorative ring -->
+    <div class="btn-stack">
+      <div class="enter-btn-ring">
+        <svg viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Dashed outer circle -->
+          <circle cx="80" cy="80" r="76" stroke="rgba(74,46,26,0.22)" stroke-width="1" stroke-dasharray="4 6"/>
+          <!-- Decorative dots at compass points -->
+          <circle cx="80" cy="4"   r="2.5" fill="rgba(74,46,26,0.35)"/>
+          <circle cx="80" cy="156" r="2.5" fill="rgba(74,46,26,0.35)"/>
+          <circle cx="4"  cy="80"  r="2.5" fill="rgba(74,46,26,0.35)"/>
+          <circle cx="156" cy="80" r="2.5" fill="rgba(74,46,26,0.35)"/>
+          <!-- Decorative small diamonds at 45° -->
+          <polygon points="80,14 83,19 80,24 77,19" fill="rgba(74,46,26,0.25)"/>
+          <polygon points="80,136 83,141 80,146 77,141" fill="rgba(74,46,26,0.25)"/>
+          <polygon points="14,80 19,77 24,80 19,83" fill="rgba(74,46,26,0.25)"/>
+          <polygon points="136,80 141,77 146,80 141,83" fill="rgba(74,46,26,0.25)"/>
+          <!-- Thin inner ring -->
+          <circle cx="80" cy="80" r="60" stroke="rgba(74,46,26,0.12)" stroke-width="0.8"/>
+          <!-- Corner flourishes -->
+          <path d="M80,20 Q84,28 80,36 Q76,28 80,20" fill="rgba(74,46,26,0.18)"/>
+          <path d="M80,124 Q84,132 80,140 Q76,132 80,124" fill="rgba(74,46,26,0.18)"/>
+          <path d="M20,80 Q28,84 36,80 Q28,76 20,80" fill="rgba(74,46,26,0.18)"/>
+          <path d="M124,80 Q132,84 140,80 Q132,76 124,80" fill="rgba(74,46,26,0.18)"/>
+        </svg>
+      </div>
+
+      <!-- The actual clickable button -->
+      <button class="enter-btn" id="enterBtn" aria-label="Open invitation">
+        <span class="enter-btn-icon">✦</span>
+        <span class="enter-btn-label">Open Invitation</span>
+        <span class="enter-btn-icon">✦</span>
+      </button>
+    </div>
+
   </div>
+
 </div>
 
 <!-- Ambient Music Background Audio -->
@@ -865,7 +1011,7 @@ html, body {
   
 
   <!-- CONTENT -->
-  <div class="card-inner" style="padding-top:185px; padding-bottom:145px;">
+  <div class="card-inner" style="padding-top: clamp(110px, 18vh, 185px); padding-bottom: clamp(90px, 14vh, 145px);">
     <div class="arabic-verse stagger-reveal reveal-1">وَخَلَقْنَٰكُمْ أَزْوَٰجًا</div>
     <div class="arabic-mono stagger-reveal reveal-2">اع</div>
     <div class="couple-names stagger-reveal reveal-3">Asif <span class="amp">&amp;</span> Aminu</div>
@@ -935,7 +1081,7 @@ html, body {
   
   
 
-  <div class="card-inner" style="padding-top:155px; padding-bottom:135px;">
+  <div class="card-inner" style="padding-top: clamp(100px, 16vh, 155px); padding-bottom: clamp(70px, 10vh, 135px);">
     <div class="arabic-verse stagger-reveal reveal-1" style="font-size:clamp(1rem,3vw,1.3rem); margin-bottom:22px;">اَلسَّلَامُ عَلَيْكُمْ وَرَحْمَةُ اللهِ وَبَرَكَاتُهُ</div>
 
     <div class="family-names stagger-reveal reveal-2">Mr. Shaji K P<br>&amp;<br>Mrs. Sherina P U</div>
@@ -1006,7 +1152,7 @@ html, body {
   
   
 
-  <div class="card-inner" style="padding-top:165px; padding-bottom:140px;">
+  <div class="card-inner" style="padding-top: clamp(90px, 12vh, 165px); padding-bottom: clamp(60px, 8vh, 140px);">
     <div class="programs-title stagger-reveal reveal-1">Other Programs</div>
     <div class="program-item stagger-reveal reveal-2">11.00 - Drinks</div>
     <div class="program-item stagger-reveal reveal-3" style="margin-bottom:28px;">1.00 - Food</div>
@@ -1139,31 +1285,31 @@ if (splashScreen) {
 
 if (enterBtn && splashScreen) {
   enterBtn.addEventListener('click', (e) => {
-    // Massive fireworks explosion
+    if (invitationOpened) return;
+    invitationOpened = true;
+
+    // Button press animation
+    enterBtn.style.transform = 'scale(0.92)';
+    setTimeout(() => { enterBtn.style.transform = ''; }, 180);
+
     const rect = enterBtn.getBoundingClientRect();
     const bx = rect.left + rect.width / 2;
     const by = rect.top + rect.height / 2;
-    createFlowerBurst(bx, by, 45, true);
 
-    // Shrink and fade button first for haptic feel
-    enterBtn.style.transition = 'all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
-    enterBtn.style.transform = 'scale(0.5)';
-    enterBtn.style.opacity = '0';
-    
+    // Flower burst immediately
+    createFlowerBurst(bx, by, 50, true);
+
+    // Open invitation almost immediately
     setTimeout(() => {
       splashScreen.classList.add('hidden');
-      invitationOpened = true;
-      
-      // TRIGGER REVEAL ANIMATIONS ON PAGE 0
+      const pageIndicator = document.getElementById('pageIndicator');
+      if (pageIndicator) pageIndicator.style.display = 'flex';
       const page0 = document.getElementById('page0');
-      if (page0) {
-        page0.classList.add('active');
-      }
-    }, 250);
-    
-    // Auto-play music if not playing
+      if (page0) page0.classList.add('active');
+    }, 200);
+
     if (music && music.paused) {
-      music.play().catch(err => console.log("Audio play blocked", err));
+      music.play().catch(err => console.log('Audio play blocked', err));
     }
   });
 }
